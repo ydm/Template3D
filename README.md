@@ -14,4 +14,3 @@ This project depends on static links to following libraries, each of which is su
 * AntTweakBar: zlib/libpng
 
 The code provided with this project is licensed under LGPLv3.  
-ydm TODO: Check if the combined work can all be licensed under LGPLv3.
