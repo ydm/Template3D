@@ -2,7 +2,9 @@
 #define __APP_HPP__
 
 #include "IApp.hpp"
+#include <GL/glew.h>
 #include <AntTweakBar.h>
+
 
 class App : public IApp
 {
@@ -27,6 +29,7 @@ public:
 private:
     double speed_;
     TwBar *twbar_;
+    GLuint vao_;
 };
 
 #endif // __APP_HPP__

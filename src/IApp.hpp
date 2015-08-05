@@ -1,8 +1,6 @@
 #ifndef __IAPP_HPP__
 #define __IAPP_HPP__
 
-#include <AntTweakBar.h>
-
 class IApp
 {
 public:
