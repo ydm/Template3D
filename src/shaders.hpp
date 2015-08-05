@@ -52,6 +52,8 @@ namespace shaders
         bool create();
         bool attachShader(const GLenum type, const std::string& source);
         bool link();
+
+        bool detachShader(const GLuint shader);
         bool free();
 
         bool use() const;

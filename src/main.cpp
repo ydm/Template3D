@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
     static const int WIDTH = 800;
     static const int HEIGHT = 800;
     static const char *TITLE = "Template";
-    
+
     GLFWwindow *window = nullptr;
 
 
@@ -236,5 +236,6 @@ termWin:
 termGlfw:
     glfwTerminate();
 
+    system("pause");
 	return 0;
 }

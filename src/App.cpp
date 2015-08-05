@@ -66,6 +66,12 @@ bool App::init()
 
 void App::terminate()
 {
+    // TODO delete vaos
+
+    TwDeleteBar(twbar_);
+    twbar_ = nullptr;
+
+    program_.free();
 }
 
 
