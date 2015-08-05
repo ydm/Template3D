@@ -85,10 +85,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\App.hpp" />
     <ClInclude Include="..\..\src\common.hpp" />
+    <ClInclude Include="..\..\src\IApp.hpp" />
+    <ClInclude Include="..\..\src\shaders.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\App.cpp" />
+    <ClCompile Include="..\..\src\IApp.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\shaders.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
