@@ -18,7 +18,8 @@ namespace
 // ========================
 
 App::App()
-: speed_(0.0)
+: program_()
+, speed_(0.0)
 , twbar_(nullptr)
 , vao_(0)
 {
@@ -32,6 +33,14 @@ App::~App()
 
 bool App::init()
 {
+    if (!program_.create())
+    {
+        return false;
+    }
+    program_.attachShader(GL_VERTEX_SHADER, "shaders/Standard.vert");
+    program_.attachShader(GL_FRAGMENT_SHADER, "shaders/Standard.frag");
+    program_.link();
+
     twbar_ = TwNewBar("Settings");
     TwDefine(" GLOBAL help='This example shows how to integrate AntTweakBar with GLFW and OpenGL.' "); // Message added to the help bar.
     TwAddVarRW(twbar_, "speed", TW_TYPE_DOUBLE, &speed_, " label='Rot speed' min=0 max=2 step=0.01 keyIncr=s keyDecr=S help='Rotation speed (turns/second)' ");
@@ -100,6 +109,8 @@ void App::onScroll(const double xoffset, const double yoffset)
 
 void App::draw()
 {
+    program_.use();
+
     glBindVertexArray(vao_);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glBindVertexArray(0);

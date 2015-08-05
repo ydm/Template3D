@@ -5,6 +5,23 @@
 
 namespace shaders
 {
+    // ========================
+    // Helpers
+    // ========================
+    std::string infoLog(const GLuint id)
+    {
+        GLint len;
+        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &len);
+
+        GLchar *log = new GLchar[len + 1];
+        glGetShaderInfoLog(id, len, nullptr, log);
+
+        std::stringstream logStream;
+        logStream << log;
+        delete [] log;
+
+        return logStream.str();
+    }
     
     
     // ========================
@@ -88,9 +105,19 @@ namespace shaders
         glGetShaderiv(id_, GL_COMPILE_STATUS, &status);
         if (status != GL_TRUE)
         {
+            std::cerr << "[E] Shader::create: '" << source_ << "' failed to compile." << std::endl;
+            std::cerr << infoLog(id_) << std::endl;
             free();
             return false;
         }
+
+        const std::string& log = infoLog(id_);
+        if (log.length() > 0)
+        {
+            std::cout << "[I] Shader::create: '" << source_ << "' created successfully." << std::endl;
+            std::cout << log << std::endl;
+        }
+
         return true;
     }
 
@@ -182,6 +209,7 @@ namespace shaders
             tail_->next_ = shader;
             tail_ = shader;
         }
+        std::cout << "[I] Program::attachShader: '" << source << "' attached successfully." << std::endl;
         return true;
     }
 
@@ -241,6 +269,7 @@ namespace shaders
             std::cerr << std::endl;
             return false;
         }
+        std::cout << "[I] Program::link: Success!" << std::endl;
         return true;
     }
 

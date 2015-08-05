@@ -4,6 +4,7 @@
 #include "IApp.hpp"
 #include <GL/glew.h>
 #include <AntTweakBar.h>
+#include "shaders.hpp"
 
 
 class App : public IApp
@@ -27,6 +28,7 @@ public:
     virtual void draw() override;
 
 private:
+    shaders::Program program_;
     double speed_;
     TwBar *twbar_;
     GLuint vao_;
