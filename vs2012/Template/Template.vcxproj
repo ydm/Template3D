@@ -86,14 +86,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\App.hpp" />
-    <ClInclude Include="..\..\src\common.hpp" />
+    <ClInclude Include="..\..\src\Camera.hpp" />
+    <ClInclude Include="..\..\src\CameraFrustum.hpp" />
+    <ClInclude Include="..\..\src\Drawable.hpp" />
     <ClInclude Include="..\..\src\IApp.hpp" />
+    <ClInclude Include="..\..\src\logging.hpp" />
+    <ClInclude Include="..\..\src\Plane.hpp" />
     <ClInclude Include="..\..\src\shaders.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\App.cpp" />
+    <ClCompile Include="..\..\src\Camera.cpp" />
+    <ClCompile Include="..\..\src\CameraFrustum.cpp" />
+    <ClCompile Include="..\..\src\Drawable.cpp" />
     <ClCompile Include="..\..\src\IApp.cpp" />
+    <ClCompile Include="..\..\src\logging.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\Plane.cpp" />
     <ClCompile Include="..\..\src\shaders.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

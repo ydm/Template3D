@@ -4,6 +4,7 @@
 #include "IApp.hpp"
 #include <GL/glew.h>
 #include <AntTweakBar.h>
+#include "Camera.hpp"
 #include "shaders.hpp"
 
 
@@ -15,6 +16,11 @@ public:
 
     virtual bool init() override;
     virtual void terminate() override;
+    
+    /**
+     * Update routine.  Returns true on state change.
+     */
+    virtual bool update(const float dt);
 
     // Callbacks
     virtual void onChar(const unsigned int codepoint) override;
@@ -28,9 +34,14 @@ public:
     virtual void draw() override;
 
 private:
+    Camera camera_;
     shaders::Program program_;
-    double speed_;
+    
+    // Bars and their variables
     TwBar *twbar_;
+    double speed_;
+    
+    // TODO
     GLuint vao_;
 };
 

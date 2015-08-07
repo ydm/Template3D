@@ -1,15 +1,8 @@
 #ifndef __SHADERS_HPP__
 #define __SHADERS_HPP__
 
-#include <iostream>
-#include <map> // ydm TODO: Replace map with something faster!
 #include <string>
-
-#ifdef _WIN32
- #include <Windows.h>
-#endif
 #include <GL/glew.h>
-// #include <GL/GLU.h>
 
 // Notes:
 //   1. Should I use glReleaseShaderCompiler()?
@@ -27,7 +20,7 @@ namespace shaders
         ~Shader();
 
         bool create();
-        bool free();
+        bool release();
 
         // Shader& operator=(const Shader& other) = delete;
         // Shader& operator=(Shader&& other) = delete;
@@ -50,19 +43,25 @@ namespace shaders
         ~Program();
 
         bool create();
+        bool release();
+        
         bool attachShader(const GLenum type, const std::string& source);
-        bool link();
-
         bool detachShader(const GLuint shader);
-        bool free();
-
+        
+        bool link();
         bool use() const;
     
         // Attributes and uniforms
-        GLuint attr(const GLchar *const name);
-        GLuint unif(const GLchar *const name);
+        bool umat3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
+        bool umat4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
+        bool uvec3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
+        bool uvec4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
     
     private:
+        enum UniformType { MATRIX3, MATRIX4, VECTOR3, VECTOR4 };
+        bool setUniform(const GLchar *const name, const GLfloat *u, const enum UniformType t, const GLboolean transpose = GL_FALSE);
+        GLint uniformLocation(const GLchar *const name);
+
         Shader *head_;
         Shader *tail_;
         GLuint id_;

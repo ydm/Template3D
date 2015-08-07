@@ -1,6 +1,8 @@
-#include "common.hpp"
+#include <chrono>
 #include <iostream>
 #include <AntTweakBar.h>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 #include "App.hpp"
 
 
@@ -62,11 +64,12 @@ namespace
      */
     void keyCallback(GLFWwindow *const window, const int key, const int scancode, const int action, const int mods)
     {
-        // std::cout << "key: key=" << key << ", action=" << action << "\n";
-        if (!TwEventKeyGLFW(key, action))
-        {
-            gApplication.onKey(key, scancode, action, mods);
-        }
+        // ydm: XXX There's a bug here: TwEventKey always returns 0.
+        gApplication.onKey(key, scancode, action, mods);
+        //if (!TwEventKeyGLFW(key, action))
+        //{
+        //    gApplication.onKey(key, scancode, action, mods);
+        //}
     }
 
 
@@ -90,10 +93,8 @@ namespace
 
     void resizeCallback(GLFWwindow *const window, const int width, const int height)
     {
-        if (!TwWindowSize(width, height))
-        {
-            gApplication.onResize(width, height);
-        }
+        TwWindowSize(width, height);
+        gApplication.onResize(width, height);
     }
 
 
@@ -208,11 +209,27 @@ int main(int argc, char *argv[])
 
     // Main loop
     // =========
+    static const float STEP = 1.0f / 60.0f;
+    float time = 0.0f;
     while (!glfwWindowShouldClose(window))
     {
-        display();
-        glfwSwapBuffers(window);
         glfwPollEvents();
+
+        const float now = static_cast<float>(glfwGetTime());
+        const float elapsed = now - time;
+        if (elapsed >= STEP)
+        {
+            time = now;
+            if (gApplication.update(elapsed))
+            {
+                display();
+                glfwSwapBuffers(window);
+            }
+        }
+        else
+        {
+            // ydm TODO: Sleep?
+        }
     }
 
 
@@ -236,6 +253,5 @@ termWin:
 termGlfw:
     glfwTerminate();
 
-    system("pause");
 	return 0;
 }
