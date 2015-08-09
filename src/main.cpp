@@ -93,6 +93,7 @@ namespace
 
     void resizeCallback(GLFWwindow *const window, const int width, const int height)
     {
+        glViewport(0, 0, width, height);
         TwWindowSize(width, height);
         gApplication.onResize(width, height);
     }
