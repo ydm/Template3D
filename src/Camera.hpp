@@ -20,7 +20,7 @@ public:
      * Update camera's position by walk()ing in
      * directions specified.
      */
-	bool update(const float dt);
+    bool update(const float dt);
 
     // Walk
     void walk(const enum Direction dir);
@@ -41,16 +41,16 @@ public:
     void setViewportSize(const int w, const int h);
 
     // Ray functions
-	glm::vec3 getLookDirection() const;
-	glm::vec3 getMouseRay(const int x, const int y) const;
+    glm::vec3 getLookDirection() const;
+    glm::vec3 getMouseRay(const int x, const int y) const;
     const glm::vec4& getPosition() const;
 
     // Matrix getters
     const glm::mat4& getViewMatrix() const;
-	/**
-	 * Get current projection matrix.  Since projection
+    /**
+     * Get current projection matrix.  Since projection
      * depends on viewport size, make sure it's set first.
-	 */
+     */
     const glm::mat4& getProjectionMatrix() const;
 
     // Visibility checking
@@ -67,9 +67,9 @@ private:
 
     bool directions_[6];
     bool mouseEnabled_;
-	glm::ivec2 mousePosition_;
+    glm::ivec2 mousePosition_;
     glm::vec4 position_; // Eye/camera position
-	glm::mat4 projection_;
+    glm::mat4 projection_;
     glm::mat4 R_;
     glm::mat4 Rinv_;
     glm::vec3 rotation_;

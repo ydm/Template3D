@@ -205,13 +205,13 @@ const glm::vec4& Camera::getPosition() const
 
 const glm::mat4& Camera::getViewMatrix() const
 {
-	return view_;
+    return view_;
 }
 
 
 const glm::mat4& Camera::getProjectionMatrix() const
 {
-	return projection_;
+    return projection_;
 }
 
 

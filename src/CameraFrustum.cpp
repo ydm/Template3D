@@ -15,17 +15,17 @@ bool CameraFrustum::sphereInside(const glm::vec3& pos, const float radius) const
 {
     for(int i = 0; i < 6; i++)
     {
-		const float dist = planes_[i].distance(pos);
-		if (dist < -radius)
+        const float dist = planes_[i].distance(pos);
+        if (dist < -radius)
         {
-			return false; // outside
+            return false; // outside
         }
-		else if (dist < radius)
+        else if (dist < radius)
         {
             // return false;
-			return true; // intersection
+            return true; // intersection
         }
-	}
+    }
     return true; // inside
 }
 
