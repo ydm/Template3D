@@ -59,7 +59,7 @@ bool App::init()
     // Setup tweak bar
     twbar_ = TwNewBar("Settings");
     TwDefine(" GLOBAL help='This example shows how to integrate AntTweakBar with GLFW and OpenGL.' "); // Message added to the help bar.
-    TwAddVarRW(twbar_, "speed", TW_TYPE_DOUBLE, &speed_, " label='Rot speed' min=0 max=2 step=0.01 keyIncr=s keyDecr=S help='Rotation speed (turns/second)' ");
+    // TwAddVarRW(twbar_, "speed", TW_TYPE_DOUBLE, &speed_, " label='Rot speed' min=0 max=2 step=0.01 keyIncr=s keyDecr=S help='Rotation speed (turns/second)' ");
 
     // Setup drawable(s)
     glGenVertexArrays(1, &vao_);
@@ -114,22 +114,25 @@ void App::onChar(const unsigned int codepoint)
 
 void App::onCursorPosition(const double xpos, const double ypos)
 {
+    camera_.mouseMotion(static_cast<int>(xpos), static_cast<int>(ypos));
 }
 
 
 void App::onKey(const int key, const int scancode, const int action, const int mods)
 {
     Camera::Direction dir;
+
     switch (key)
     {
-    case GLFW_KEY_W: dir = Camera::FORWARD; break;
-    case GLFW_KEY_A: dir = Camera::LEFT; break;
-    case GLFW_KEY_S: dir = Camera::BACKWARD; break;
-    case GLFW_KEY_D: dir = Camera::RIGHT; break;
-    case GLFW_KEY_LEFT_CONTROL: dir = Camera::DOWN; break;
-    case GLFW_KEY_SPACE: dir = Camera::UP; break;
-    default: return;
+        case GLFW_KEY_W:            dir = Camera::FORWARD;  break;
+        case GLFW_KEY_A:            dir = Camera::LEFT;     break;
+        case GLFW_KEY_S:            dir = Camera::BACKWARD; break;
+        case GLFW_KEY_D:            dir = Camera::RIGHT;    break;
+        case GLFW_KEY_LEFT_CONTROL: dir = Camera::DOWN;     break;
+        case GLFW_KEY_SPACE:        dir = Camera::UP;       break;
+        default: return;
     }
+
     if (action)
     {
         camera_.walk(dir);
@@ -143,6 +146,17 @@ void App::onKey(const int key, const int scancode, const int action, const int m
 
 void App::onMouseButton(int button, int action, int mods)
 {
+    if (button == GLFW_MOUSE_BUTTON_RIGHT)
+    {
+        if (action == GLFW_PRESS)
+        {
+            camera_.enableMouse();
+        }
+        else
+        {
+            camera_.disableMouse();
+        }
+    }
 }
 
 

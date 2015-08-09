@@ -65,7 +65,8 @@ bool Camera::update(const float dt)
         }
     }
 
-    if (changed)
+    // Always returns `true` when mouse is enabled
+    if (changed || mouseEnabled_)
     {
         updateViewMatrix();
         return true;
@@ -86,10 +87,9 @@ void Camera::stopWalking(const enum Direction dir) {directions_[dir] = false;}
 // Rotating with mouse
 // ========================
 
-void Camera::enableMouse(const int x, const int y)
+void Camera::enableMouse()
 {
-    mousePosition_[0] = x;
-    mousePosition_[1] = y;
+    mouseEnabled_ = true;
 }
 
 
@@ -97,7 +97,7 @@ void Camera::mouseMotion(const int x, const int y)
 {
     static const float SENSITIVITY = 1.0f;
 
-    if (mousePosition_[0] != -1 && mousePosition_[1] != -1)
+    if (mouseEnabled_)
     {
         // Compute steps
         const int sx = x - mousePosition_[0];
@@ -108,16 +108,17 @@ void Camera::mouseMotion(const int x, const int y)
         // I define this to be sensitivity of 1.
         const float rx = static_cast<float>(sy) / viewportSize_.x * glm::pi<float>() * SENSITIVITY;
         const float ry = static_cast<float>(sx) / viewportSize_.y * glm::pi<float>() * SENSITIVITY;
-        rotate(rx, ry, 0);
-
-        mousePosition_[0] = x;
-        mousePosition_[1] = y;
+        addToRotation(rx, ry, 0);
     }
+
+    mousePosition_[0] = x;
+    mousePosition_[1] = y;
 }
 
 
 void Camera::disableMouse()
 {
+    mouseEnabled_ = false;
     mousePosition_[0] = -1;
     mousePosition_[1] = -1;
 }
@@ -126,32 +127,6 @@ void Camera::disableMouse()
 // ========================
 // Setters
 // ========================
-
-void Camera::rotate(const float rx, const float ry, const float rz)
-{
-    static const glm::mat4 I(1);
-    static const glm::vec3 vx = glm::vec3(1, 0, 0);
-    static const glm::vec3 vy = glm::vec3(0, 1, 0);
-    static const glm::vec3 vz = glm::vec3(0, 0, 1);
-
-    rotation_[0] += rx;
-    rotation_[1] += ry;
-    rotation_[2] += rz;
-
-    R_  = (rotation_[0] ? glm::rotate(rotation_[0], vx) : I) *
-          (rotation_[1] ? glm::rotate(rotation_[1], vy) : I) *
-          (rotation_[2] ? glm::rotate(rotation_[2], vz) : I);
-    Rinv_ = glm::transpose(R_);
-
-    updateViewMatrix();
-}
-
-
-void Camera::rotateDeg(const float rx, const float ry, const float rz)
-{
-    rotate(glm::radians(rx), glm::radians(ry), glm::radians(rz));
-}
-
 
 void Camera::setPosition(const glm::vec3& pos)
 {
@@ -294,13 +269,31 @@ Camera::getCameraFrustum() const
 // Private
 // ========================
 
+void Camera::addToRotation(const float rx, const float ry, const float rz)
+{
+    static const glm::mat4 I(1);
+    static const glm::vec3 vx = glm::vec3(1, 0, 0);
+    static const glm::vec3 vy = glm::vec3(0, 1, 0);
+    static const glm::vec3 vz = glm::vec3(0, 0, 1);
+
+    rotation_[0] += rx;
+    rotation_[1] += ry;
+    rotation_[2] += rz;
+
+    R_  = (rotation_[0] ? glm::rotate(rotation_[0], vx) : I) *
+          (rotation_[1] ? glm::rotate(rotation_[1], vy) : I) *
+          (rotation_[2] ? glm::rotate(rotation_[2], vz) : I);
+    Rinv_ = glm::transpose(R_);
+}
+
+
 float Camera::getAspectRatio() const
 {
     return static_cast<float>(viewportSize_.x) / viewportSize_.y;
 }
 
 
-glm::vec4 Camera::getVelocity(const unsigned dir)
+glm::vec4 Camera::getVelocity(const unsigned dir) const
 {
     switch (dir)
     {

@@ -27,14 +27,13 @@ public:
     void stopWalking(const enum Direction dir);
 
     // Mouse controls
-    void enableMouse(const int x, const int y);
+    void enableMouse();
     void mouseMotion(const int x, const int y);
     void disableMouse();
 
     // Manually set camera state.
-    void rotate(const float rx, const float ry, const float rz);
-    void rotateDeg(const float rx, const float ry, const float rz);
     void setPosition(const glm::vec3& pos);
+    // TODO: rotation
 
     // Parameters
     float getMovementSpeed() const;
@@ -61,11 +60,13 @@ public:
     CameraFrustum *getCameraFrustum() const;
     
 private:
+    void addToRotation(const float rx, const float ry, const float rz);
     float getAspectRatio() const;
-    glm::vec4 getVelocity(const unsigned dir);
+    glm::vec4 getVelocity(const unsigned dir) const;
     void updateViewMatrix();
 
     bool directions_[6];
+    bool mouseEnabled_;
 	glm::ivec2 mousePosition_;
     glm::vec4 position_; // Eye/camera position
 	glm::mat4 projection_;

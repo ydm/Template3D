@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <thread>
 #include <AntTweakBar.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -48,7 +49,6 @@ namespace
     {
         glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
         TwDraw();
         gApplication.draw();
     }
@@ -132,9 +132,13 @@ namespace
 // 5. Application
 int main(int argc, char *argv[])
 {
+    static const char *TITLE = "Template";
     static const int WIDTH = 800;
     static const int HEIGHT = 800;
-    static const char *TITLE = "Template";
+
+    static const int FPS = 60;
+    static const std::chrono::nanoseconds STEPN(1000000000 / FPS);
+    static const float STEPF = std::chrono::duration_cast<std::chrono::duration<float> >(STEPN).count();
 
     GLFWwindow *window = nullptr;
 
@@ -146,6 +150,7 @@ int main(int argc, char *argv[])
         std::cerr << "Error: glfwInit() failed" << std::endl;
         return 0;
     }
+
 
     // 2. Create window
     // ================
@@ -187,17 +192,14 @@ int main(int argc, char *argv[])
     }
 
 
-    // 5. Initialize main application object
-    // =====================================
+    // 5. Initialize main application object and resize initially
+    // ==========================================================
     if (!gApplication.init())
     {
         std::cerr << "Error: Application failed to initialize" << std::endl;
         goto termTw;
     }
 
-
-    // Call resize callback initially
-    // ==============================
     do
     {
         int width, height;
@@ -209,26 +211,32 @@ int main(int argc, char *argv[])
 
     // Main loop
     // =========
-    static const float STEP = 1.0f / 60.0f;
-    float time = 0.0f;
+    
+    // Draw initially
+    display();
+    glfwSwapBuffers(window);
+
+    // Loop
     while (!glfwWindowShouldClose(window))
     {
+        const std::chrono::system_clock::time_point begin = std::chrono::system_clock::now();
+
+        // Invoke registered event callbacks.
         glfwPollEvents();
 
-        const float now = static_cast<float>(glfwGetTime());
-        const float elapsed = now - time;
-        if (elapsed >= STEP)
+        // Update the application state.
+        gApplication.update(STEPF); // XXX: Fixed step is OK for now.
+
+        display();
+        glfwSwapBuffers(window);
+
+        // There's a fixed FPS count, so here we sleep for the time remaining for this frame.
+        const std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
+        const auto elapsed = end - begin;
+        if (STEPN > elapsed)
         {
-            time = now;
-            if (gApplication.update(elapsed))
-            {
-                display();
-                glfwSwapBuffers(window);
-            }
-        }
-        else
-        {
-            // ydm TODO: Sleep?
+            const auto dur = STEPN - elapsed;
+            std::this_thread::sleep_for(dur);
         }
     }
 
