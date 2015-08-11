@@ -2,17 +2,9 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include "glm/ext.hpp"
-
-
-namespace
-{
-    GLfloat points[] = {
-        0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        1.0f, 0.0f, 0.0f,
-        1.0f, 1.0f, 0.0f
-    };
-}
+#include "AxisRotator.hpp"
+#include "EulerRotator.hpp"
+#include "TripodDrawable.hpp"
 
 
 // ========================
@@ -21,10 +13,7 @@ namespace
 
 App::App()
 : camera_()
-, program_()
-, speed_(0.0)
-, twbar_(nullptr)
-, vao_(0)
+, drawables_()
 {
 }
 
@@ -36,46 +25,39 @@ App::~App()
 
 bool App::init()
 {
-    // Setup shader program
-    if (!program_.create())
-    {
-        return false;
-    }
-    program_.attachShader(GL_VERTEX_SHADER, "shaders/Standard.vert");
-    program_.attachShader(GL_FRAGMENT_SHADER, "shaders/Standard.frag");
-    if (program_.link())
-    {
-        std::cout << "[I] App: Program linked!" << std::endl;
-    }
-    else
-    {
-        return false;
-    }
-
     // Setup camera
-    camera_.setPosition(glm::vec3(0.5f, 0.0f, 0.0f));
-    program_.umat4("u_viewMatrix", glm::value_ptr(camera_.getViewMatrix()));
+    camera_.setPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 
-    // Setup tweak bar
-    twbar_ = TwNewBar("Settings");
-    TwDefine(" GLOBAL help='This example shows how to integrate AntTweakBar with GLFW and OpenGL.' "); // Message added to the help bar.
-    // TwAddVarRW(twbar_, "speed", TW_TYPE_DOUBLE, &speed_, " label='Rot speed' min=0 max=2 step=0.01 keyIncr=s keyDecr=S help='Rotation speed (turns/second)' ");
+    // Init tripods
+    drawables_.init();
 
-    // Setup drawable(s)
-    glGenVertexArrays(1, &vao_);
-    glBindVertexArray(vao_);
     {
-        GLuint buf;
-        glGenBuffers(1, &buf);
-        glBindBuffer(GL_ARRAY_BUFFER, buf);
-        {
-            glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), points, GL_STATIC_DRAW);
-            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-            glEnableVertexArrayAttrib(vao_, 0);
-        }
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        // Euler rotation: black tripod
+        TripodDrawable *const b = new TripodDrawable();
+        drawables_.addDrawable(b);
+        b->setColors(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        b->setPosition(glm::vec3(-1.5f, 0.0f, 0.0f));
+
+        // Euler rotation: colored tripod
+        TripodDrawable *const d = new TripodDrawable(new EulerRotator());
+        drawables_.addDrawable(d);
+        d->setPosition(glm::vec3(-1.5f, 0.0f, 0.0f));
     }
-    glBindVertexArray(0);
+
+    {
+        // Axis rotation: black tripod
+        TripodDrawable *const b = new TripodDrawable();
+        drawables_.addDrawable(b);
+        b->setColors(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        b->setPosition(glm::vec3(1.5f, 0.0f, 0.0f));
+
+        // Axis rotation: colored tripod
+        TripodDrawable *const d = new TripodDrawable(new AxisRotator());
+        drawables_.addDrawable(d);
+        d->setPosition(glm::vec3(1.5f, 0.0f, 0.0f));
+    }
+    
+    drawables_.setViewMatrix(glm::value_ptr(camera_.getViewMatrix()));
 
     return true;
 }
@@ -83,23 +65,20 @@ bool App::init()
 
 void App::terminate()
 {
-    // TODO delete vaos
-
-    TwDeleteBar(twbar_);
-    twbar_ = nullptr;
-
-    program_.release();
+    drawables_.terminate();
 }
 
 
 bool App::update(const float dt)
 {
-    if (camera_.update(dt))
+    const bool c = camera_.update(dt);
+    const bool d = drawables_.update(dt);
+    if (c)
     {
-        program_.umat4("u_viewMatrix", glm::value_ptr(camera_.getViewMatrix()));
-        return true;
+	drawables_.setViewMatrix(glm::value_ptr(camera_.getViewMatrix()));
+	return true;
     }
-    return false;
+    return d;
 }
 
 
@@ -163,7 +142,7 @@ void App::onMouseButton(int button, int action, int mods)
 void App::onResize(const int width, const int height)
 {
     camera_.setViewportSize(width, height);
-    program_.umat4("u_projectionMatrix", glm::value_ptr(camera_.getProjectionMatrix()));
+    drawables_.setProjectionMatrix(glm::value_ptr(camera_.getProjectionMatrix()));
 }
 
 
@@ -178,9 +157,5 @@ void App::onScroll(const double xoffset, const double yoffset)
 
 void App::draw()
 {
-    program_.use();
-
-    glBindVertexArray(vao_);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glBindVertexArray(0);
+    drawables_.draw();
 }

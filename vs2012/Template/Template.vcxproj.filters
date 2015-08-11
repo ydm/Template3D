@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\drawables">
+      <UniqueIdentifier>{849831a2-22e2-46a8-90a4-dde66566367a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\drawables">
+      <UniqueIdentifier>{07e9f88f-28c0-4711-a672-85597181e9d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EulerAngles">
+      <UniqueIdentifier>{ff256cc1-b789-4a50-aca1-fa0c3f06d243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EulerAngles">
+      <UniqueIdentifier>{7f6cda6c-fbd8-4167-a361-a2b2ea99b1e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -27,9 +39,6 @@
     <ClInclude Include="..\..\src\IApp.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Drawable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\logging.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -41,6 +50,24 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Plane.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Drawable.hpp">
+      <Filter>Header Files\drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DrawableManager.hpp">
+      <Filter>Header Files\drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TripodDrawable.hpp">
+      <Filter>Header Files\EulerAngles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\AxisRotator.hpp">
+      <Filter>Header Files\EulerAngles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EulerRotator.hpp">
+      <Filter>Header Files\EulerAngles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Rotator.hpp">
+      <Filter>Header Files\EulerAngles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +83,6 @@
     <ClCompile Include="..\..\src\IApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Drawable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\logging.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +94,24 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Plane.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Drawable.cpp">
+      <Filter>Source Files\drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DrawableManager.cpp">
+      <Filter>Source Files\drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TripodDrawable.cpp">
+      <Filter>Source Files\EulerAngles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EulerRotator.cpp">
+      <Filter>Source Files\EulerAngles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\AxisRotator.cpp">
+      <Filter>Source Files\EulerAngles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Rotator.cpp">
+      <Filter>Source Files\EulerAngles</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -86,24 +86,34 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\App.hpp" />
+    <ClInclude Include="..\..\src\AxisRotator.hpp" />
     <ClInclude Include="..\..\src\Camera.hpp" />
     <ClInclude Include="..\..\src\CameraFrustum.hpp" />
     <ClInclude Include="..\..\src\Drawable.hpp" />
+    <ClInclude Include="..\..\src\DrawableManager.hpp" />
+    <ClInclude Include="..\..\src\EulerRotator.hpp" />
     <ClInclude Include="..\..\src\IApp.hpp" />
     <ClInclude Include="..\..\src\logging.hpp" />
     <ClInclude Include="..\..\src\Plane.hpp" />
+    <ClInclude Include="..\..\src\Rotator.hpp" />
     <ClInclude Include="..\..\src\shaders.hpp" />
+    <ClInclude Include="..\..\src\TripodDrawable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\App.cpp" />
+    <ClCompile Include="..\..\src\AxisRotator.cpp" />
     <ClCompile Include="..\..\src\Camera.cpp" />
     <ClCompile Include="..\..\src\CameraFrustum.cpp" />
     <ClCompile Include="..\..\src\Drawable.cpp" />
+    <ClCompile Include="..\..\src\DrawableManager.cpp" />
+    <ClCompile Include="..\..\src\EulerRotator.cpp" />
     <ClCompile Include="..\..\src\IApp.cpp" />
     <ClCompile Include="..\..\src\logging.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\Plane.cpp" />
+    <ClCompile Include="..\..\src\Rotator.cpp" />
     <ClCompile Include="..\..\src\shaders.cpp" />
+    <ClCompile Include="..\..\src\TripodDrawable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

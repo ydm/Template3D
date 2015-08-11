@@ -2,10 +2,9 @@
 #define __APP_HPP__
 
 #include "IApp.hpp"
-#include <GL/glew.h>
 #include <AntTweakBar.h>
 #include "Camera.hpp"
-#include "shaders.hpp"
+#include "DrawableManager.hpp"
 
 
 class App : public IApp
@@ -35,14 +34,7 @@ public:
 
 private:
     Camera camera_;
-    shaders::Program program_;
-    
-    // Bars and their variables
-    TwBar *twbar_;
-    double speed_;
-    
-    // TODO
-    GLuint vao_;
+	DrawableManager drawables_;
 };
 
 #endif // __APP_HPP__

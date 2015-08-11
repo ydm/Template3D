@@ -4,6 +4,7 @@
 
 Drawable::Drawable()
 : program_()
+, next_(nullptr)
 {
 }
 
@@ -15,7 +16,20 @@ Drawable::~Drawable()
 
 bool Drawable::init()
 {
-    return program_.create();
+	static const GLfloat I[] = {
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+	if (program_.create() && addShaders() && program_.link())
+	{
+		setProjectionMatrix(I);
+		setViewMatrix(I);
+		setModelMatrix(I);
+		return true;
+	}
+	return false;
 }
 
 
@@ -32,22 +46,31 @@ void Drawable::draw()
 }
 
 
-void Drawable::setProjectionMatrix(const glm::mat4& M)
+bool Drawable::update(const float dt)
 {
-
+	return false;
 }
 
 
-void Drawable::setViewMatrix(const glm::mat4& M)
+void Drawable::setProjectionMatrix(const GLfloat *const M)
 {
-
+	program_.umat4("u_projectionMatrix", M);
 }
 
 
-void Drawable::addShader(const GLuint type, const std::string& source)
+void Drawable::setViewMatrix(const GLfloat *const M)
 {
-    if (!program_.attachShader(type, source))
-    {
-        // TODO
-    }
+	program_.umat4("u_viewMatrix", M);
+}
+
+
+void Drawable::setModelMatrix(const GLfloat *const M)
+{
+	program_.umat4("u_modelMatrix", M);
+}
+
+
+bool Drawable::addShader(const GLuint type, const std::string& source)
+{
+	return program_.attachShader(type, source);
 }
