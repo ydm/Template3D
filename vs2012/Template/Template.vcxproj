@@ -85,6 +85,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\BMPReader.hpp" />
     <ClInclude Include="..\..\src\EulerAnglesApp.hpp" />
     <ClInclude Include="..\..\src\AxisRotator.hpp" />
     <ClInclude Include="..\..\src\BaseApp.hpp" />
@@ -98,9 +99,12 @@
     <ClInclude Include="..\..\src\Plane.hpp" />
     <ClInclude Include="..\..\src\Rotator.hpp" />
     <ClInclude Include="..\..\src\shaders.hpp" />
+    <ClInclude Include="..\..\src\TexturedDrawable.hpp" />
+    <ClInclude Include="..\..\src\TexturesApp.hpp" />
     <ClInclude Include="..\..\src\TripodDrawable.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\BMPReader.cpp" />
     <ClCompile Include="..\..\src\EulerAnglesApp.cpp" />
     <ClCompile Include="..\..\src\AxisRotator.cpp" />
     <ClCompile Include="..\..\src\BaseApp.cpp" />
@@ -115,6 +119,8 @@
     <ClCompile Include="..\..\src\Plane.cpp" />
     <ClCompile Include="..\..\src\Rotator.cpp" />
     <ClCompile Include="..\..\src\shaders.cpp" />
+    <ClCompile Include="..\..\src\TexturedDrawable.cpp" />
+    <ClCompile Include="..\..\src\TexturesApp.cpp" />
     <ClCompile Include="..\..\src\TripodDrawable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
