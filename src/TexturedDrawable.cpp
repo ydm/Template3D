@@ -1,4 +1,5 @@
 #include "TexturedDrawable.hpp"
+// #include <GLFW/glfw3.h>
 #include "glm/ext.hpp"
 
 
@@ -73,17 +74,29 @@ bool TexturedDrawable::init()
     GLuint texid;
     glGenTextures(1, &texid);
     glBindTexture(GL_TEXTURE_2D, texid);
-    glTexImage2D(GL_TEXTURE_2D,
-                 0,
-                 GL_RGB,
-                 reader_.width,
-                 reader_.height,
-                 0,
-                 GL_BGR,
-                 GL_UNSIGNED_BYTE,
-                 reader_.data);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    // glfwLoadTexture2D("textures/wood.bmp", 0);
+    glTexImage2D(GL_TEXTURE_2D,                 // Target
+                 0,                             // Level
+                 GL_RGB,                        // Internal format
+                 reader_.width,                 // 
+                 reader_.height,                // 
+                 0,                             // Border
+                 GL_BGR,                        // Format
+                 GL_UNSIGNED_BYTE,              // Type
+                 reader_.data);                 // Data
+
+    // Hm...
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+    // http://www.opengl-tutorial.org/beginners-tutorials/tutorial-5-a-textured-cube/
+    // When MAGnifying the image (no bigger mipmap available), use LINEAR filtering
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // When MINifying the image, use a LINEAR blend of two mipmaps, each filtered LINEARLY too
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    // Generate mipmaps, by the way.
+    glGenerateMipmap(GL_TEXTURE_2D);
     
     return true;
 }

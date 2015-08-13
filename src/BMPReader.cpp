@@ -45,10 +45,10 @@ void BMPReader::read(const std::string& path)
   // Close file
   fclose(f);
   
-  std::cout << "dataPos=" << dataPos << ", "
-            << "imageSize=" << imageSize << ", "
-            << "width=" << width << ", "
-            << "height=" << height << "\n";
+  //std::cout << "dataPos=" << dataPos << ", "
+  //          << "imageSize=" << imageSize << ", "
+  //          << "width=" << width << ", "
+  //          << "height=" << height << "\n";
 }
 
 void BMPReader::clear()
