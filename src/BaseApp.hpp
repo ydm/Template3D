@@ -1,5 +1,5 @@
-#ifndef __APP_HPP__
-#define __APP_HPP__
+#ifndef __BASE_APP_HPP__
+#define __BASE_APP_HPP__
 
 #include "IApp.hpp"
 #include <AntTweakBar.h>
@@ -7,11 +7,11 @@
 #include "DrawableManager.hpp"
 
 
-class App : public IApp
+class BaseApp : public IApp
 {
 public:
-    App();
-    virtual ~App();
+    BaseApp();
+    virtual ~BaseApp();
 
     virtual bool init() override;
     virtual void terminate() override;
@@ -32,9 +32,9 @@ public:
     // Draw routine
     virtual void draw() override;
 
-private:
+protected:
     Camera camera_;
-	DrawableManager drawables_;
+    DrawableManager drawables_;
 };
 
-#endif // __APP_HPP__
+#endif // __BASE_APP_HPP__

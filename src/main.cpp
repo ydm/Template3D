@@ -4,7 +4,7 @@
 #include <AntTweakBar.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "App.hpp"
+#include "EulerAnglesApp.hpp"
 
 
 // ========================
@@ -13,7 +13,7 @@
 
 namespace
 {
-    App gApplication;
+    EulerAnglesApp gApplication;
     double gCursorPositionY = 0.0;
 
 
