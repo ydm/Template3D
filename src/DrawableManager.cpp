@@ -26,12 +26,12 @@ void DrawableManager::terminate()
 	
     while (d != nullptr)
     {
-	d->terminate();
-		
-	Drawable *const del = d;
-	d = d->next_;
+	Drawable *const n = d->next_;
 
-	delete del;
+	d->terminate();
+	delete d;
+
+	d = n;
     }
 
     head_ = tail_ = nullptr;
@@ -52,6 +52,7 @@ void DrawableManager::addDrawable(Drawable *const drawable)
 	}
 	else
 	{
+		assert(drawable->next_ == nullptr);
 		tail_->next_ = drawable;
 		tail_ = drawable;
 	}

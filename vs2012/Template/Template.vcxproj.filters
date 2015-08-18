@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\drawables">
-      <UniqueIdentifier>{849831a2-22e2-46a8-90a4-dde66566367a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\drawables">
-      <UniqueIdentifier>{07e9f88f-28c0-4711-a672-85597181e9d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\EulerAngles">
       <UniqueIdentifier>{ff256cc1-b789-4a50-aca1-fa0c3f06d243}</UniqueIdentifier>
     </Filter>
@@ -37,16 +31,28 @@
     <Filter Include="Source Files\Template">
       <UniqueIdentifier>{21cf360c-6c59-4ef9-a0d6-c0e4d3811997}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{baabcd99-9a69-4120-87ca-0970952230cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{a7513cb9-790e-4180-83ad-ab0850decc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Template\Drawables">
+      <UniqueIdentifier>{849831a2-22e2-46a8-90a4-dde66566367a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Template\Drawables">
+      <UniqueIdentifier>{07e9f88f-28c0-4711-a672-85597181e9d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Drawable.hpp">
-      <Filter>Header Files\drawables</Filter>
+      <Filter>Header Files\Template\Drawables</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\DrawableManager.hpp">
-      <Filter>Header Files\drawables</Filter>
+      <Filter>Header Files\Template\Drawables</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\TripodDrawable.hpp">
       <Filter>Header Files\EulerAngles</Filter>
@@ -93,13 +99,19 @@
     <ClInclude Include="..\..\src\BMPReader.hpp">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\ModelApp.hpp">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ModelDrawable.hpp">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Drawable.cpp">
-      <Filter>Source Files\drawables</Filter>
+      <Filter>Source Files\Template\Drawables</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\DrawableManager.cpp">
-      <Filter>Source Files\drawables</Filter>
+      <Filter>Source Files\Template\Drawables</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TripodDrawable.cpp">
       <Filter>Source Files\EulerAngles</Filter>
@@ -148,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\BMPReader.cpp">
       <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ModelApp.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ModelDrawable.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

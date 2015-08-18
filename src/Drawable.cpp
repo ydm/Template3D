@@ -11,6 +11,9 @@ Drawable::Drawable()
 
 Drawable::~Drawable()
 {
+	// Prevent errors by nullifying the next pointer,
+	// as it should not be used after object deletion.
+	next_ = nullptr;
 }
 
 

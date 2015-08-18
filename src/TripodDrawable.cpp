@@ -98,8 +98,8 @@ void TripodDrawable::terminate()
     {
         rotator_->terminate();
     }
-
     // TODO: Term vao
+    Drawable::terminate();
 }
 
 

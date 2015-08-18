@@ -60,7 +60,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;AntTweakBar.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AntTweakBar.lib;assimpd.lib;glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -78,7 +78,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;AntTweakBar.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>AntTweakBar.lib;assimpd.lib;glew32.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,6 +96,8 @@
     <ClInclude Include="..\..\src\EulerRotator.hpp" />
     <ClInclude Include="..\..\src\IApp.hpp" />
     <ClInclude Include="..\..\src\logging.hpp" />
+    <ClInclude Include="..\..\src\ModelApp.hpp" />
+    <ClInclude Include="..\..\src\ModelDrawable.hpp" />
     <ClInclude Include="..\..\src\Plane.hpp" />
     <ClInclude Include="..\..\src\Rotator.hpp" />
     <ClInclude Include="..\..\src\shaders.hpp" />
@@ -116,6 +118,8 @@
     <ClCompile Include="..\..\src\IApp.cpp" />
     <ClCompile Include="..\..\src\logging.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\ModelApp.cpp" />
+    <ClCompile Include="..\..\src\ModelDrawable.cpp" />
     <ClCompile Include="..\..\src\Plane.cpp" />
     <ClCompile Include="..\..\src\Rotator.cpp" />
     <ClCompile Include="..\..\src\shaders.cpp" />

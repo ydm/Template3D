@@ -4,7 +4,7 @@
 #include <AntTweakBar.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "TexturesApp.hpp"
+#include "ModelApp.hpp"
 
 
 // ========================
@@ -13,7 +13,7 @@
 
 namespace
 {
-    TexturesApp gApplication;
+    ModelApp gApplication;
     double gCursorPositionY = 0.0;
 
 
