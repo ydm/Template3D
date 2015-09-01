@@ -104,6 +104,7 @@
     <ClInclude Include="..\..\src\TexturedDrawable.hpp" />
     <ClInclude Include="..\..\src\TexturesApp.hpp" />
     <ClInclude Include="..\..\src\TripodDrawable.hpp" />
+    <ClInclude Include="..\..\src\warnings.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\BMPReader.cpp" />

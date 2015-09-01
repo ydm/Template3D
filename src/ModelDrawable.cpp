@@ -1,12 +1,12 @@
 #include "ModelDrawable.hpp"
 #include <iostream>
+#include <assimp/cimport.h>
 // #include <assimp/Importer.hpp>
 #include <assimp/mesh.h>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
-#include <assimp/cimport.h>
-#include "glm/ext.hpp"
 
+#include "glm/ext.hpp"
 
 
 ModelDrawable::ModelDrawable(const std::string& filename)
@@ -31,16 +31,24 @@ bool ModelDrawable::init()
 		return false;
 	}
 
-    	// TODO: Move this to init!
-	scene_ = aiImportFile(filename_.c_str(),aiProcessPreset_TargetRealtime_MaxQuality);
+	// aiProcessPreset_TargetRealtime_MaxQuality
+	const int FLAGS = aiProcess_Triangulate
+		// | aiProcess_OptimizeMeshes
+		// | aiProcess_JoinIdenticalVertices
+		// | aiProcess_PreTransformVertices
+		// | aiProcess_FlipUVs
+		;
+	scene_ = aiImportFile(filename_.c_str(), FLAGS);
 	if (scene_ == nullptr)
 	{
-		std::cerr << "[E] ModelDrawable::init: scene is NULL" << std::endl;
+		std::cerr << "[E] ModelDrawable::init: scene is NULL, "
+			<< "filename=" << filename_ << ", "
+			<< "error=" << aiGetErrorString() << std::endl;
 		return false;
 	}
 	if (!scene_->HasMeshes())
 	{
-		std::cerr << "[E] ModelDrawable::init: scene->mNumMeshes == " << scene_->mNumMeshes << std::endl;
+		std::cerr << "[E] ModelDrawable::init: scene has no meshes" << std::endl;
 		return false;
 	}
 
@@ -73,10 +81,10 @@ bool ModelDrawable::init()
 		assert(mesh->HasFaces());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo_[2]);
 		{
-			unsigned int *indices = new unsigned int[mesh->mNumFaces * 3];
-			for(int i = 0; i < mesh->mNumFaces; ++i)
+			GLuint *const indices = new GLuint[3 * mesh->mNumFaces];
+			for(unsigned i = 0; i < mesh->mNumFaces; ++i)
 			{
-				indices[i * 3] = mesh->mFaces[i].mIndices[0];
+				indices[i * 3 + 0] = mesh->mFaces[i].mIndices[0];
 				indices[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
 				indices[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
 			}
@@ -86,6 +94,10 @@ bool ModelDrawable::init()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 	glBindVertexArray(0);
+
+	// aiReleaseImport(scene_);
+	// scene_ = nullptr;
+
 	return true;
 }
 
@@ -94,7 +106,9 @@ void ModelDrawable::terminate()
 {
 	glDeleteVertexArrays(1, &vao_);
 	glDeleteBuffers(3, vbo_);
-	delete scene_;
+	
+	aiReleaseImport(scene_);
+	scene_ = nullptr;
 	
 	vao_ = 0;
 	vbo_[0] = vbo_[1] = vbo_[2];

@@ -105,6 +105,9 @@
     <ClInclude Include="..\..\src\ModelDrawable.hpp">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\warnings.h">
+      <Filter>Header Files\Template</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Drawable.cpp">

@@ -48,9 +48,18 @@ namespace
     void display()
     {
         glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         TwDraw();
         gApplication.draw();
+    }
+
+
+    bool initOpenGL()
+    {
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	return glGetError() == GL_NO_ERROR;
     }
 
 
@@ -174,13 +183,18 @@ int main(int argc, char *argv[])
     glfwSetScrollCallback(window, scrollCallback);
 
 
-    // 3. Init GLEW
-    // ============
+    // 3. Init GLEW and OpenGL
+    // =======================
     const GLenum ret = glewInit();
     if (ret != GLEW_OK)
     {
         std::cerr << "Error: " << glewGetErrorString(ret) << std::endl;
         goto termWin;
+    }
+    if (!initOpenGL())
+    {
+	    std::cerr << "Error: initOpenGL failed: " /* << gluErrorString(glGetError()) */ << std::endl;
+	    return 0;
     }
 
 

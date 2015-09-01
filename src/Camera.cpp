@@ -9,7 +9,7 @@
 namespace
 {
     const float NEAR_PLANE = 0.1f;
-    const float FAR_PLANE = 3000.0f;
+    const float FAR_PLANE = 1000.0f;
     const float FOVY = glm::radians(70.0f);
     // const float MAXPOS = 100.0f;
 }
@@ -38,7 +38,7 @@ Camera::Camera()
 , R_()
 , Rinv_()
 , rotation_()
-, speed_(3.0f)
+, speed_(10.0f)
 , velocity_()
 , view_(1.0)
 , viewportSize_(800, 600)

@@ -1,6 +1,7 @@
 #include <cassert>
 #include <iostream>
 #include "BMPReader.hpp"
+#include "warnings.h"
 
 
 BMPReader::BMPReader()
