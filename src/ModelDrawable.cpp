@@ -119,7 +119,9 @@ bool ModelDrawable::update(const float dt)
 
 bool ModelDrawable::addShaders()
 {
-    return addShader(GL_VERTEX_SHADER, "shaders/Model.vert") && addShader(GL_FRAGMENT_SHADER, "shaders/Model.frag");
+    return addShader(GL_VERTEX_SHADER, "shaders/Model.vert")
+	    // && addShader(GL_FRAGMENT_SHADER, "shaders/Model.frag");
+	    && addShader(GL_FRAGMENT_SHADER, "shaders/ModelDiffuse.frag");
 }
 
 

@@ -8,7 +8,7 @@
 class TripodDrawable : public Drawable
 {
 public:
-	TripodDrawable(Rotator *const rotator = nullptr);
+	TripodDrawable(const float scale = 1.0f, Rotator *const rotator = nullptr);
 	virtual ~TripodDrawable();
 
 	virtual bool init() override;
@@ -27,6 +27,7 @@ protected:
 
 private:
 	Rotator *const rotator_;
+	const float scale_;
 	GLuint vao_;
         GLuint vbo_[2];
 	glm::mat4 M_;

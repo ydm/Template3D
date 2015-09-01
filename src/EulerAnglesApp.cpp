@@ -37,7 +37,7 @@ bool EulerAnglesApp::init()
         b->setPosition(glm::vec3(-1.5f, 0.0f, 0.0f));
 
         // Euler rotation: colored tripod
-        TripodDrawable *const d = new TripodDrawable(new EulerRotator());
+        TripodDrawable *const d = new TripodDrawable(1.0f, new EulerRotator());
         drawables_.addDrawable(d);
         d->setPosition(glm::vec3(-1.5f, 0.0f, 0.0f));
     }
@@ -50,7 +50,7 @@ bool EulerAnglesApp::init()
         b->setPosition(glm::vec3(1.5f, 0.0f, 0.0f));
 
         // Axis rotation: colored tripod
-        TripodDrawable *const d = new TripodDrawable(new AxisRotator());
+        TripodDrawable *const d = new TripodDrawable(1.0f, new AxisRotator());
         drawables_.addDrawable(d);
         d->setPosition(glm::vec3(1.5f, 0.0f, 0.0f));
     }

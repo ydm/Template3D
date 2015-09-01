@@ -1,5 +1,6 @@
 #include "TripodDrawable.hpp"
 #include "glm/ext.hpp"
+#include <iostream>
 
 
 namespace
@@ -34,12 +35,14 @@ namespace
 }
 
 
-TripodDrawable::TripodDrawable(Rotator *const rotator)
+TripodDrawable::TripodDrawable(const float scale, Rotator *const rotator)
 : Drawable()
 , rotator_(rotator)
+, scale_(scale)
 , vao_(0)
 , M_(1.0f)
 {
+    M_[0][0] = M_[1][1] = M_[2][2] = scale;
     vbo_[0] = 0;
     vbo_[1] = 0;
 }
@@ -88,6 +91,10 @@ bool TripodDrawable::init()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     glBindVertexArray(0);
+
+    // Setup model matrix initially
+    // setModelMatrix(glm::value_ptr(M_ * glm::scale(glm::vec3(scale_))));
+    setModelMatrix(glm::value_ptr(M_));
     return true;
 }
 
@@ -114,16 +121,17 @@ bool TripodDrawable::update(const float dt)
     const glm::mat4 R = rotator_->rotate();
     for (int i = 0; i < 3; i++)
     {
-        if (M_[i] != R[i]) // Change in position
+	// Change in position
+        if (M_[i] != R[i]) 
         {
             // Save position
             const glm::vec4 t(M_[3]);
-            M_ = R;
+            M_ = R * scale_;
             M_[3] = t;
             // Update uniform model matrix
             setModelMatrix(glm::value_ptr(M_));
             // Notify of change
-            return true;
+	    return true;
         }
     }
     return false;
