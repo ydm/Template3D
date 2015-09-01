@@ -31,14 +31,7 @@ bool ModelDrawable::init()
 		return false;
 	}
 
-	// aiProcessPreset_TargetRealtime_MaxQuality
-	const int FLAGS = aiProcess_Triangulate
-		// | aiProcess_OptimizeMeshes
-		// | aiProcess_JoinIdenticalVertices
-		// | aiProcess_PreTransformVertices
-		// | aiProcess_FlipUVs
-		;
-	scene_ = aiImportFile(filename_.c_str(), FLAGS);
+	scene_ = aiImportFile(filename_.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 	if (scene_ == nullptr)
 	{
 		std::cerr << "[E] ModelDrawable::init: scene is NULL, "
