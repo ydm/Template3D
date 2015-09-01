@@ -196,6 +196,9 @@ int main(int argc, char *argv[])
 	    std::cerr << "Error: initOpenGL failed: " /* << gluErrorString(glGetError()) */ << std::endl;
 	    return 0;
     }
+    // Print OpenGL versions
+    std::cout << "OpenGL " << glGetString(GL_VERSION) << ", "
+	    << "GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
 
     // 4. Init AntTweakBar
@@ -205,7 +208,7 @@ int main(int argc, char *argv[])
         std::cerr << "Error: TwInit() failed" << std::endl;
         goto termWin;
     }
-
+    
 
     // 5. Initialize main application object and resize initially
     // ==========================================================
