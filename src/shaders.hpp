@@ -54,11 +54,13 @@ namespace shaders
         // Attributes and uniforms
         bool umat3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
         bool umat4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
-        bool uvec3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
-        bool uvec4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
+	bool uvec2(const GLchar *const name, const GLfloat *const M);
+        bool uvec3(const GLchar *const name, const GLfloat *const M);
+        bool uvec4(const GLchar *const name, const GLfloat *const M);
+	bool ufloat(const GLchar *const name, const GLfloat value);
     
     private:
-        enum UniformType { MATRIX3, MATRIX4, VECTOR3, VECTOR4 };
+        enum UniformType { MATRIX3, MATRIX4, VECTOR2, VECTOR3, VECTOR4, FLOAT };
         bool setUniform(const GLchar *const name, const GLfloat *u, const enum UniformType t, const GLboolean transpose = GL_FALSE);
         GLint uniformLocation(const GLchar *const name);
 

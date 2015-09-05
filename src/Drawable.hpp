@@ -22,7 +22,9 @@ public:
 
     virtual void setProjectionMatrix(const GLfloat *const M);
     virtual void setViewMatrix(const GLfloat *const M);
-	virtual void setModelMatrix(const GLfloat *const M);
+    virtual void setModelMatrix(const GLfloat *const M);
+    virtual void setUniformFloat(const GLchar *const name, const GLfloat value);
+    virtual void setUniformVec2(const GLchar *const name, const GLfloat *const vec);
 
 protected:
 	virtual bool addShaders() = 0;

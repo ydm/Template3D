@@ -96,8 +96,10 @@
     <ClInclude Include="..\..\src\EulerRotator.hpp" />
     <ClInclude Include="..\..\src\IApp.hpp" />
     <ClInclude Include="..\..\src\logging.hpp" />
+    <ClInclude Include="..\..\src\MandelbrotDrawable.hpp" />
     <ClInclude Include="..\..\src\ModelApp.hpp" />
     <ClInclude Include="..\..\src\ModelDrawable.hpp" />
+    <ClInclude Include="..\..\src\OrthographicApp.hpp" />
     <ClInclude Include="..\..\src\Plane.hpp" />
     <ClInclude Include="..\..\src\Rotator.hpp" />
     <ClInclude Include="..\..\src\shaders.hpp" />
@@ -119,8 +121,10 @@
     <ClCompile Include="..\..\src\IApp.cpp" />
     <ClCompile Include="..\..\src\logging.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\MandelbrotDrawable.cpp" />
     <ClCompile Include="..\..\src\ModelApp.cpp" />
     <ClCompile Include="..\..\src\ModelDrawable.cpp" />
+    <ClCompile Include="..\..\src\OrthographicApp.cpp" />
     <ClCompile Include="..\..\src\Plane.cpp" />
     <ClCompile Include="..\..\src\Rotator.cpp" />
     <ClCompile Include="..\..\src\shaders.cpp" />

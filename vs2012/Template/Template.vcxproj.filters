@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Template\Drawables">
       <UniqueIdentifier>{07e9f88f-28c0-4711-a672-85597181e9d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mandelbrot">
+      <UniqueIdentifier>{e5b23ae5-fd85-4298-91ee-44bfb981d961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mandelbrot">
+      <UniqueIdentifier>{43951d20-2714-41b4-866f-1dfccfca4480}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -108,6 +114,12 @@
     <ClInclude Include="..\..\src\warnings.h">
       <Filter>Header Files\Template</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\OrthographicApp.hpp">
+      <Filter>Header Files\Mandelbrot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MandelbrotDrawable.hpp">
+      <Filter>Header Files\Mandelbrot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Drawable.cpp">
@@ -169,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\ModelDrawable.cpp">
       <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\OrthographicApp.cpp">
+      <Filter>Source Files\Mandelbrot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MandelbrotDrawable.cpp">
+      <Filter>Source Files\Mandelbrot</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -4,7 +4,8 @@
 #include <AntTweakBar.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "ModelApp.hpp"
+// #include "ModelApp.hpp"
+#include "OrthographicApp.hpp"
 
 
 // ========================
@@ -13,7 +14,8 @@
 
 namespace
 {
-    ModelApp gApplication;
+    // ModelApp gApplication;
+	OrthographicApp gApplication;
     double gCursorPositionY = 0.0;
 
 

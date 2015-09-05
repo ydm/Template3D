@@ -325,15 +325,27 @@ namespace shaders
     }
 
 
-    bool Program::uvec3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose)
+    bool Program::uvec2(const GLchar *const name, const GLfloat *const M)
     {
-        return setUniform(name, M, VECTOR3, transpose);
+        return setUniform(name, M, VECTOR2);
+    }
+    
+    
+    bool Program::uvec3(const GLchar *const name, const GLfloat *const M)
+    {
+        return setUniform(name, M, VECTOR3);
     }
 
 
-    bool Program::uvec4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose)
+    bool Program::uvec4(const GLchar *const name, const GLfloat *const M)
     {
-        return setUniform(name, M, VECTOR4, transpose);
+        return setUniform(name, M, VECTOR4);
+    }
+
+
+    bool Program::ufloat(const GLchar *const name, const GLfloat value)
+    {
+        return setUniform(name, &value, FLOAT);
     }
 
 
@@ -349,8 +361,10 @@ namespace shaders
         {
         case MATRIX3: glUniformMatrix3fv(loc, 1, transpose, u); break;
         case MATRIX4: glUniformMatrix4fv(loc, 1, transpose, u); break;
+        case VECTOR2: glUniform2fv(loc, 1, u); break;
         case VECTOR3: glUniform3fv(loc, 1, u); break;
         case VECTOR4: glUniform4fv(loc, 1, u); break;
+	case FLOAT: glUniform1f(loc, *u); break;
         }
         const GLenum err = glGetError();
         if (err != GL_NO_ERROR)

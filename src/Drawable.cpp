@@ -73,6 +73,18 @@ void Drawable::setModelMatrix(const GLfloat *const M)
 }
 
 
+void Drawable::setUniformFloat(const GLchar *const name, const GLfloat value)
+{
+	program_.ufloat(name, value);
+}
+
+
+void Drawable::setUniformVec2(const GLchar *const name, const GLfloat *const vec)
+{
+	program_.uvec2(name, vec);
+}
+
+
 bool Drawable::addShader(const GLuint type, const std::string& source)
 {
 	return program_.attachShader(type, source);
