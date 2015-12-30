@@ -1,7 +1,7 @@
 #include "shaders.hpp"
 #include <iostream>
 #include <sstream>
-#include "utils/file.hpp"
+#include <utils/file.hpp>
 
 
 namespace shaders
@@ -66,7 +66,7 @@ namespace shaders
         }
 
         // Assign source.
-        std::string& src = utils::file::read(source_);
+        const std::string& src = utils::file::read(source_);
         if (src.length() == 0)
         {
             std::cerr << "[E] Shader::create: Error while reading file '" << source_ << "'." << std::endl;

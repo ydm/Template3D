@@ -155,6 +155,7 @@ int main(int argc, char *argv[])
 	static const float STEPF = std::chrono::duration_cast<std::chrono::duration<float> >(STEPN).count();
 
 	GLFWwindow *window = nullptr;
+	GLenum ret;
 
 
 	// 1. Init GLFW
@@ -189,7 +190,7 @@ int main(int argc, char *argv[])
 
 	// 3. Init GLEW and OpenGL
 	// =======================
-	const GLenum ret = glewInit();
+	ret = glewInit();
 	if (ret != GLEW_OK)
 	{
 		std::cerr << "Error: " << glewGetErrorString(ret) << std::endl;
@@ -224,7 +225,7 @@ int main(int argc, char *argv[])
 
 	do
 	{
-		int width, height;
+		int width = WIDTH, height = HEIGHT;
 		glfwGetFramebufferSize(window, &width, &height);
 		resizeCallback(window, width, height);
 	}
