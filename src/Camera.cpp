@@ -33,7 +33,7 @@ glm::vec2 computePlaneSize(const float fovyRad, const float distance, const floa
 
 Camera::Camera()
 : mousePosition_(-1, -1)
-, position_(0, 0, 5, 1)
+, position_(0, 0, 0, 1)
 , projection_(1.0)
 , R_()
 , Rinv_()

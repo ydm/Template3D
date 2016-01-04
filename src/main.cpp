@@ -1,11 +1,11 @@
-#include <chrono>
+#include <ctime>
 #include <iostream>
 #include <thread>
 #include <AntTweakBar.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-// #include "ModelApp.hpp"
-#include "OrthographicApp.hpp"
+#include "ModelApp.hpp"
+// #include "OrthographicApp.hpp"
 
 
 // ========================
@@ -15,8 +15,8 @@
 namespace
 {
 
-// ModelApp gApplication;
-OrthographicApp gApplication;
+ModelApp gApplication;
+// OrthographicApp gApplication;
 double gCursorPositionY = 0.0;
 
 
@@ -150,12 +150,9 @@ int main(int argc, char *argv[])
 	static const int WIDTH = 800;
 	static const int HEIGHT = 800;
 
-	static const int FPS = 60;
-	static const std::chrono::nanoseconds STEPN(1000000000 / FPS);
-	static const float STEPF = std::chrono::duration_cast<std::chrono::duration<float> >(STEPN).count();
-
 	GLFWwindow *window = nullptr;
 	GLenum ret;
+	std::clock_t lastUpdate;
 
 
 	// 1. Init GLFW
@@ -235,32 +232,30 @@ int main(int argc, char *argv[])
 	// Main loop
 	// =========
     
-	// Draw initially
+	// Update and draw initially
+	lastUpdate = std::clock();
+	gApplication.update(0.0f);
+
 	display();
 	glfwSwapBuffers(window);
 
 	// Loop
 	while (!glfwWindowShouldClose(window))
 	{
-		const std::chrono::system_clock::time_point begin = std::chrono::system_clock::now();
-
 		// Invoke registered event callbacks.
 		glfwPollEvents();
 
 		// Update the application state.
-		gApplication.update(STEPF); // XXX: Fixed step is OK for now.
+		const clock_t now = clock();
+		// const float dt = static_cast<float>(now - lastUpdate) / CLOCKS_PER_SEC;
+		const double ddt = static_cast<double>(now - lastUpdate);
+		const float dt = static_cast<float>(ddt / CLOCKS_PER_SEC);
+		printf("dt=%f\n", dt);
+		gApplication.update(dt);
+		lastUpdate = now;
 
 		display();
 		glfwSwapBuffers(window);
-
-		// There's a fixed FPS count, so here we sleep for the time remaining for this frame.
-		const std::chrono::system_clock::time_point end = std::chrono::system_clock::now();
-		const auto elapsed = end - begin;
-		if (STEPN > elapsed)
-		{
-			const auto dur = STEPN - elapsed;
-			std::this_thread::sleep_for(dur);
-		}
 	}
 
 

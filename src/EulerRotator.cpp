@@ -2,15 +2,6 @@
 #include "glm/ext.hpp"
 
 
-namespace
-{
-    float rad(const float r)
-    {
-        return r * glm::pi<float>();
-    }
-}
-
-
 EulerRotator::EulerRotator()
 : Rotator()
 {
@@ -43,8 +34,7 @@ glm::mat4 EulerRotator::rotate()
     static const glm::vec3 Y(0.0f, 1.0f, 0.0f);
     static const glm::vec3 Z(0.0f, 0.0f, 1.0f);
 
-    // return glm::rota
-    return glm::rotate(rad(angles_[0]), Y)
-         * glm::rotate(rad(angles_[1]), X)
-         * glm::rotate(rad(angles_[2]), Z);
+    return glm::rotate(glm::radians(angles_[0]), Y)
+         * glm::rotate(glm::radians(angles_[1]), X)
+         * glm::rotate(glm::radians(angles_[2]), Z);
 }
