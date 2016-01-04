@@ -152,9 +152,6 @@ int main(int argc, char *argv[])
 	static const char *const TITLE  = "Template";
 	static const int         WIDTH  = 800;
 	static const int         HEIGHT = 800;
-	static const clock_t     FPS    = 120;
-	static const float       STEPF  = 1.0f / FPS;
-	static const int64_t     STEPL  = 1000000 / FPS;
 
 	GLFWwindow *window = nullptr;
 	GLenum ret;
