@@ -1,3 +1,4 @@
+#include <chrono>
 #include <ctime>
 #include <iostream>
 #include <thread>
@@ -17,6 +18,7 @@ namespace
 
 ModelApp gApplication;
 // OrthographicApp gApplication;
+
 double gCursorPositionY = 0.0;
 
 
@@ -48,12 +50,13 @@ void cursorPositionCallback(GLFWwindow *const window, const double xpos, const d
 }
 
 
-void display()
+void display(GLFWwindow *const window)
 {
-        glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        TwDraw();
-        gApplication.draw();
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	TwDraw();
+	gApplication.draw();
+	glfwSwapBuffers(window);
 }
 
 
@@ -146,13 +149,16 @@ void scrollCallback(GLFWwindow *const window, const double xoffset, const double
 // 5. Application
 int main(int argc, char *argv[])
 {
-	static const char *const TITLE = "Template";
-	static const int WIDTH = 800;
-	static const int HEIGHT = 800;
+	static const char *const TITLE  = "Template";
+	static const int         WIDTH  = 800;
+	static const int         HEIGHT = 800;
+	static const clock_t     FPS    = 120;
+	static const float       STEPF  = 1.0f / FPS;
+	static const int64_t     STEPL  = 1000000 / FPS;
 
 	GLFWwindow *window = nullptr;
 	GLenum ret;
-	std::clock_t lastUpdate;
+	std::chrono::system_clock::time_point lastUpdate;
 
 
 	// 1. Init GLFW
@@ -232,12 +238,11 @@ int main(int argc, char *argv[])
 	// Main loop
 	// =========
     
-	// Update and draw initially
-	lastUpdate = std::clock();
-	gApplication.update(0.0f);
+	// Draw initially
 
-	display();
-	glfwSwapBuffers(window);
+	lastUpdate = std::chrono::system_clock::now();
+	gApplication.update(0.0f);
+	display(window);
 
 	// Loop
 	while (!glfwWindowShouldClose(window))
@@ -246,16 +251,16 @@ int main(int argc, char *argv[])
 		glfwPollEvents();
 
 		// Update the application state.
-		const clock_t now = clock();
-		// const float dt = static_cast<float>(now - lastUpdate) / CLOCKS_PER_SEC;
-		const double ddt = static_cast<double>(now - lastUpdate);
-		const float dt = static_cast<float>(ddt / CLOCKS_PER_SEC);
-		printf("dt=%f\n", dt);
-		gApplication.update(dt);
+		const auto now = std::chrono::system_clock::now();
+		const std::chrono::duration<float> dt = now - lastUpdate;
+		const bool updated = gApplication.update(dt.count());
 		lastUpdate = now;
 
-		display();
-		glfwSwapBuffers(window);
+		// Draw
+		if (updated)
+		{
+			display(window);
+		}
 	}
 
 

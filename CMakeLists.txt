@@ -61,4 +61,6 @@ target_link_libraries (${NAME} ${GLFW_STATIC_LIBRARIES})  # or GLFW_LIBRARIES
 
 # Enable C++ features
 # -------------------
+target_compile_features (${NAME} PRIVATE cxx_auto_type)
 target_compile_features (${NAME} PRIVATE cxx_nullptr)
+target_compile_features (${NAME} PRIVATE cxx_override)

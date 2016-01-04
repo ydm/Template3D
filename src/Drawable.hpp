@@ -11,29 +11,29 @@ class DrawableManager;
 class Drawable
 {
 public:
-    Drawable();
-    ~Drawable();
+	Drawable();
+	virtual ~Drawable();
 
-    virtual bool init();
-    virtual void terminate();
+	virtual bool init();
+	virtual void terminate();
 
-    virtual void draw();
+	virtual void draw();
 	virtual bool update(const float dt);
 
-    virtual void setProjectionMatrix(const GLfloat *const M);
-    virtual void setViewMatrix(const GLfloat *const M);
-    virtual void setModelMatrix(const GLfloat *const M);
-    virtual void setUniformFloat(const GLchar *const name, const GLfloat value);
-    virtual void setUniformVec2(const GLchar *const name, const GLfloat *const vec);
+	virtual void setProjectionMatrix(const GLfloat *const M);
+	virtual void setViewMatrix(const GLfloat *const M);
+	virtual void setModelMatrix(const GLfloat *const M);
+	virtual void setUniformFloat(const GLchar *const name, const GLfloat value);
+	virtual void setUniformVec2(const GLchar *const name, const GLfloat *const vec);
 
 protected:
 	virtual bool addShaders() = 0;
 	virtual void drawWithShader() = 0;
 
-    bool addShader(const GLuint type, const std::string& source);
+	bool addShader(const GLuint type, const std::string& source);
 
 private:
-    shaders::Program program_;
+	shaders::Program program_;
 	Drawable *next_;
 
 	friend class DrawableManager;

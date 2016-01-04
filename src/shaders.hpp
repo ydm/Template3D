@@ -10,12 +10,13 @@
 
 namespace shaders
 {
-    class Program;
+
+class Program;
 
 
-    class Shader
-    {
-    public:
+class Shader
+{
+public:
         Shader(const GLenum type, const std::string& source);
         ~Shader();
 
@@ -25,7 +26,7 @@ namespace shaders
         // Shader& operator=(const Shader& other) = delete;
         // Shader& operator=(Shader&& other) = delete;
 
-    private:
+private:
         const GLenum type_;
         const std::string source_;
 
@@ -33,12 +34,12 @@ namespace shaders
         Shader *next_; // Linked list of shaders
 
         friend class Program;
-    };
+};
 
 
-    class Program
-    {
-    public:
+class Program
+{
+public:
         Program();
         ~Program();
 
@@ -54,12 +55,12 @@ namespace shaders
         // Attributes and uniforms
         bool umat3(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
         bool umat4(const GLchar *const name, const GLfloat *const M, const GLboolean transpose = GL_FALSE);
-	bool uvec2(const GLchar *const name, const GLfloat *const M);
-        bool uvec3(const GLchar *const name, const GLfloat *const M);
-        bool uvec4(const GLchar *const name, const GLfloat *const M);
+	bool uvec2(const GLchar *const name, const GLfloat *const v);
+        bool uvec3(const GLchar *const name, const GLfloat *const v);
+        bool uvec4(const GLchar *const name, const GLfloat *const v);
 	bool ufloat(const GLchar *const name, const GLfloat value);
     
-    private:
+private:
         enum UniformType { MATRIX3, MATRIX4, VECTOR2, VECTOR3, VECTOR4, FLOAT };
         bool setUniform(const GLchar *const name, const GLfloat *u, const enum UniformType t, const GLboolean transpose = GL_FALSE);
         GLint uniformLocation(const GLchar *const name);
@@ -67,7 +68,8 @@ namespace shaders
         Shader *head_;
         Shader *tail_;
         GLuint id_;
-    };
 };
+
+} // namespace
 
 #endif // __SHADERS_HPP__

@@ -7,18 +7,18 @@
 class DrawableManager
 {
 public:
-    DrawableManager();
-    ~DrawableManager();
+	DrawableManager();
+	~DrawableManager();
 
-    bool init();
-    void terminate();
+	bool init();
+	void terminate();
 
 	void addDrawable(Drawable *const drawable);
-    void draw();
+	void draw();
 	bool update(const float dt);
 
-    void setProjectionMatrix(const GLfloat *const M);
-    void setViewMatrix(const GLfloat *const M);
+	void setProjectionMatrix(const GLfloat *const M);
+	void setViewMatrix(const GLfloat *const M);
 
 private:
 	Drawable *head_;
