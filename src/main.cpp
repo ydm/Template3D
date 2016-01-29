@@ -1,12 +1,10 @@
 #include <chrono>
-#include <ctime>
 #include <iostream>
-#include <thread>
 #include <AntTweakBar.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include "ModelApp.hpp"
+#include "default.hpp"
+// #include "ModelApp.hpp"
 // #include "OrthographicApp.hpp"
+#include "EulerAnglesApp.hpp"
 
 
 // ========================
@@ -16,9 +14,9 @@
 namespace
 {
 
-ModelApp gApplication;
+// ModelApp gApplication;
 // OrthographicApp gApplication;
-
+EulerAnglesApp gApplication;
 double gCursorPositionY = 0.0;
 
 
@@ -79,12 +77,10 @@ bool initOpenGL()
  */
 void keyCallback(GLFWwindow *const window, const int key, const int scancode, const int action, const int mods)
 {
-        // ydm: XXX There's a bug here: TwEventKey always returns 0.
-        gApplication.onKey(key, scancode, action, mods);
-        //if (!TwEventKeyGLFW(key, action))
-        //{
-        //    gApplication.onKey(key, scancode, action, mods);
-        //}
+	if (TwEventKeyGLFW(key, action) == 0)
+	{
+		gApplication.onKey(key, scancode, action, mods);
+	}
 }
 
 
@@ -254,7 +250,7 @@ int main(int argc, char *argv[])
 		lastUpdate = now;
 
 		// Draw
-		if (updated)
+		if (true /* updated */)
 		{
 			display(window);
 		}

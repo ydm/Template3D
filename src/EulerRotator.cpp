@@ -2,6 +2,17 @@
 #include "glm/ext.hpp"
 
 
+namespace
+{
+
+float rad(const float r)
+{
+        return r * glm::pi<float>();
+}
+
+} // namespace
+
+
 EulerRotator::EulerRotator()
 : Rotator()
 {
@@ -17,8 +28,9 @@ bool EulerRotator::init()
 {
     // Setup tweak bar
     bar_ = TwNewBar("Euler Rotation");
-    
-    // TwDefine(" GLOBAL help='' ");
+
+    TwDefine(" GLOBAL help='Adjust rotation using Euler Angles' ");
+
     // keyIncr=s keyDecr=S
     TwAddVarRW(bar_, "heading", TW_TYPE_FLOAT, &angles_[0], " label='Heading (Y)' min=-2 max=2 step=0.01 ");
     TwAddVarRW(bar_, "pitch", TW_TYPE_FLOAT, &angles_[1], " label='Pitch (X)' min=-2 max=2 step=0.01 ");
@@ -34,7 +46,7 @@ glm::mat4 EulerRotator::rotate()
     static const glm::vec3 Y(0.0f, 1.0f, 0.0f);
     static const glm::vec3 Z(0.0f, 0.0f, 1.0f);
 
-    return glm::rotate(glm::radians(angles_[0]), Y)
-         * glm::rotate(glm::radians(angles_[1]), X)
-         * glm::rotate(glm::radians(angles_[2]), Z);
+    return glm::rotate(rad(angles_[0]), Y)
+         * glm::rotate(rad(angles_[1]), X)
+         * glm::rotate(rad(angles_[2]), Z);
 }

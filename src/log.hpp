@@ -4,7 +4,7 @@
 #include <string>
 
 
-namespace logging
+namespace log
 {
     void v(const std::string& s); // Level 0
     void d(const std::string& s); // Level 1

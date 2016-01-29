@@ -1,11 +1,19 @@
-#ifndef __CAMERA_FRUSTUM_HPP__
-#define __CAMERA_FRUSTUM_HPP__
+#ifndef __T3D_CAMERA_FRUSTUM_HPP__
+#define __T3D_CAMERA_FRUSTUM_HPP__
 
 #include "Plane.hpp"
 
+
+namespace t3d
+{
+
+// Camera is declared as a friend class and has to be
+// forward-declared.
 class Camera;
 
-
+/**
+ *
+ */
 class CameraFrustum
 {
 public:
@@ -17,9 +25,10 @@ public:
 
 private:
     Plane planes_[6];
-
     friend class Camera;
 };
 
+} // namespace
 
-#endif // __CAMERA_FRUSTUM_HPP__
+
+#endif // __T3D_CAMERA_FRUSTUM_HPP__

@@ -3,6 +3,9 @@
 #include "glm/ext.hpp"
 
 
+namespace t3d
+{
+
 // ========================
 // Constants
 // ========================
@@ -236,6 +239,11 @@ Camera::getCameraFrustum() const
     const glm::vec3 nc = cameraPos + dir * NEAR_PLANE;
     const glm::vec3& a = up * nearSize.y;
     const glm::vec3& b = right * nearSize.x;
+
+    // Naming is as follows:
+    // ntl = near top left
+    // fbr = far bottom right
+
     const glm::vec3 ntl = nc + (a / 2.0f) - (b / 2.0f);
     const glm::vec3 ntr = ntl + b;
     const glm::vec3 nbl = ntl - a;
@@ -314,4 +322,6 @@ void Camera::updateViewMatrix()
     // view_ = glm::mat4(R_);
     // view_[3] = -position_;
     view_ = R_ * glm::translate(glm::vec3(-position_));
+}
+
 }

@@ -1,14 +1,8 @@
 #include "Plane.hpp"
-#include "glm/ext.hpp"
 
 
-std::ostream& operator<<(std::ostream& os, const Plane& obj)
+namespace t3d
 {
-    os << "[Plane " << "n=" << glm::to_string(obj.n_) << ", "
-                    << "d=" << obj.d_ << "]";
-    return os;
-}
-
 
 Plane::Plane()
 : d_(0.0f)
@@ -23,6 +17,7 @@ Plane::Plane(const glm::vec3& one, const glm::vec3& two, const glm::vec3& three)
 {
     setPlane(one, two, three);
 }
+
 
 Plane::Plane(const glm::vec4& one, const glm::vec4& two, const glm::vec4& three)
 : d_(0.0f)
@@ -41,8 +36,8 @@ Plane& Plane::operator=(const Plane& other)
 {
     if (this != &other)
     {
-        d_ = other.d_;
-        n_ = other.n_;
+	d_ = other.d_;
+	n_ = other.n_;
     }
     return *this;
 }
@@ -75,3 +70,13 @@ void Plane::setPlane(const glm::vec4& one, const glm::vec4& two, const glm::vec4
 {
     setPlane(glm::vec3(one), glm::vec3(two), glm::vec3(three));
 }
+
+
+std::ostream& operator<<(std::ostream& os, const Plane& obj)
+{
+    os << "[Plane " << "n=" << glm::to_string(obj.n_) << ", "
+       << "d=" << obj.d_ << "]";
+    return os;
+}
+
+} // namespace

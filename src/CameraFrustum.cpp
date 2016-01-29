@@ -1,6 +1,9 @@
 #include "CameraFrustum.hpp"
 
 
+namespace t3d
+{
+
 CameraFrustum::CameraFrustum()
 {
 }
@@ -34,3 +37,5 @@ bool CameraFrustum::sphereInside(const glm::vec4& pos, const float radius) const
 {
     return sphereInside(glm::vec3(pos), radius);
 }
+
+} // namespace

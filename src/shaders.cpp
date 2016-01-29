@@ -4,12 +4,13 @@
 #include <utils/file.hpp>
 
 
-namespace shaders
+namespace
 {
 
 // ========================
 // Helpers
 // ========================
+
 std::string infoLog(const GLuint id)
 {
         GLint len;
@@ -24,8 +25,13 @@ std::string infoLog(const GLuint id)
 
         return logStream.str();
 }
-    
-    
+
+} //namespace
+
+
+namespace shaders
+{
+
 // ========================
 // Shader
 // ========================
