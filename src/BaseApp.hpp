@@ -36,6 +36,11 @@ public:
     virtual void draw() override;
 
 protected:
+    /**
+     * Call this after init().
+     */
+    bool postInit();
+
     Camera camera_;
     DrawableManager drawables_;
 };

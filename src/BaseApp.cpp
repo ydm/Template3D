@@ -126,4 +126,15 @@ void BaseApp::draw()
     drawables_.draw();
 }
 
+
+// ========================
+// Protected
+// ========================
+
+bool BaseApp::postInit()
+{
+    drawables_.setViewMatrix(glm::value_ptr(camera_.getViewMatrix()));
+    return true;
+}
+
 } // namespace

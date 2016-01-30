@@ -3,7 +3,8 @@
 #include <AntTweakBar.h>
 // #include "ModelApp.hpp"
 // #include "OrthographicApp.hpp"
-#include "examples/EulerAnglesApp.hpp"
+// #include "examples/EulerAnglesApp.hpp"
+#include "examples/EmbreeApp.hpp"
 
 
 // ========================
@@ -15,7 +16,8 @@ namespace
 
 // ModelApp gApplication;
 // OrthographicApp gApplication;
-t3d::EulerAnglesApp gApplication;
+// t3d::EulerAnglesApp gApplication;
+t3d::EmbreeApp gApplication;
 double gCursorPositionY = 0.0;
 
 
@@ -53,7 +55,10 @@ void display(GLFWwindow *const window)
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     TwDraw();
-    gApplication.draw();
+    // if (updated)
+    // {
+        gApplication.draw();
+    // }
     glfwSwapBuffers(window);
 }
 
@@ -236,7 +241,6 @@ int main(int argc, char *argv[])
     // =========
 
     // Draw initially
-
     lastUpdate = std::chrono::system_clock::now();
     gApplication.update(0.0f);
     display(window);
@@ -250,14 +254,12 @@ int main(int argc, char *argv[])
         // Update the application state.
         const auto now = std::chrono::system_clock::now();
         const std::chrono::duration<float> dt = now - lastUpdate;
-        const bool updated = gApplication.update(dt.count());
+        /* const bool updated = */
+        gApplication.update(dt.count());
         lastUpdate = now;
 
         // Draw
-        if (true /* updated */)
-        {
-            display(window);
-        }
+        display(window);
     }
 
 
