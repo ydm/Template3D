@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
     // ============
     if (!glfwInit())
     {
-        std::cerr << "Error: glfwInit() failed" << std::endl;
+        log::e << "Error: glfwInit() failed" << log::endl;
         return 0;
     }
 
@@ -172,7 +172,7 @@ int main(int argc, char *argv[])
     window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, nullptr, nullptr);
     if (!window)
     {
-        std::cerr << "Error: glfwCreateWindow() failed" << std::endl;
+        log::e << "Error: glfwCreateWindow() failed" << log::endl;
         goto termGlfw;
     }
 
