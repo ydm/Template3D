@@ -174,15 +174,22 @@ glm::vec3 Camera::getLookDirection() const
 }
 
 
+glm::vec3 Camera::getMouseRay(const double x, const double y) const
+{
+    return getMouseRay(static_cast<float>(x), static_cast<float>(y));
+}
+
+
 // Big thanks to http://schabby.de/picking-opengl-ray-tracing/
-glm::vec3 Camera::getMouseRay(const int x, const int y) const
+glm::vec3 Camera::getMouseRay(const float x, const float y) const
 {
     // 3D
-    const glm::vec2& half = computePlaneSize(glm::radians(FOVY), NEAR_PLANE, getAspectRatio()) / 2.0f;
+    const glm::vec2& half = computePlaneSize(
+        glm::radians(FOVY), NEAR_PLANE, getAspectRatio()) / 2.0f;
 
     // 2D
-    const float windowHalfWidth = static_cast<float>(viewportSize_.x) / 2.0f;
-    const float windowHalfHeight = static_cast<float>(viewportSize_.y) / 2.0f;
+    const float windowHalfWidth = viewportSize_.x / 2.0f;
+    const float windowHalfHeight = viewportSize_.y / 2.0f;
     const float xp =  x / windowHalfWidth  - 1.0f;
     const float yp = -y / windowHalfHeight + 1.0f;
 

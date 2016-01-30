@@ -13,6 +13,7 @@ public:
     EmbreeApp();
     virtual ~EmbreeApp();
     virtual bool init() override;
+    virtual void onCursorPosition(const double x, const double y) override;
 };
 
 } // namespace

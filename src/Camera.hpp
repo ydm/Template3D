@@ -60,7 +60,8 @@ public:
     // --------------------
     glm::vec3 getLookDirection() const;
     // TODO: Return t3d::Ray!
-    glm::vec3 getMouseRay(const int x, const int y) const;
+    glm::vec3 getMouseRay(const double x, const double y) const;
+    glm::vec3 getMouseRay(const float x, const float y) const;
     const glm::vec4& getPosition() const;
 
     // --------------

@@ -2,7 +2,7 @@
 #define __TRIPOD_DRAWABLE_HPP__
 
 #include "Drawable.hpp"
-#include "Rotator.hpp"
+#include "examples/Rotator.hpp"  // TODO: OMG!!!
 
 
 namespace t3d
