@@ -1,10 +1,9 @@
-#include <chrono>
-#include <iostream>
-#include <AntTweakBar.h>
 #include "default.hpp"
+#include <chrono>
+#include <AntTweakBar.h>
 // #include "ModelApp.hpp"
 // #include "OrthographicApp.hpp"
-// #include "EulerAnglesApp.hpp"
+#include "examples/EulerAnglesApp.hpp"
 
 
 // ========================
@@ -148,6 +147,8 @@ void scrollCallback(GLFWwindow *const window,
 // 5. Application
 int main(int argc, char *argv[])
 {
+    namespace log = t3d::log;
+
     static const char *const TITLE  = "Template";
     static const int         WIDTH  = 800;
     static const int         HEIGHT = 800;
@@ -192,26 +193,24 @@ int main(int argc, char *argv[])
     ret = glewInit();
     if (ret != GLEW_OK)
     {
-        std::cerr << "Error: " << glewGetErrorString(ret) << std::endl;
+        log::e << "Error: " << glewGetErrorString(ret) << log::endl;
         goto termWin;
     }
     if (!initOpenGL())
     {
-        // TODO: Use log
-        std::cerr << "Error: initOpenGL failed: " /* << gluErrorString(glGetError()) */ << std::endl;
+        log::e << "Error: initOpenGL() failed" << log::endl;
         return 0;
     }
     // Print OpenGL versions
-    // TODO: Use log
-    std::cout << "OpenGL " << glGetString(GL_VERSION) << ", "
-              << "GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    log::v << "OpenGL " << glGetString(GL_VERSION) << log::endl;
+    log::v << "GLSL "<< glGetString(GL_SHADING_LANGUAGE_VERSION) << log::endl;
 
 
     // 4. Init AntTweakBar
     // ===================
     if (!TwInit(TW_OPENGL, nullptr))
     {
-        std::cerr << "Error: TwInit() failed" << std::endl;
+        log::e << "Error: TwInit() failed" << log::endl;
         goto termWin;
     }
 
@@ -220,7 +219,7 @@ int main(int argc, char *argv[])
     // ==========================================================
     if (!gApplication.init())
     {
-        std::cerr << "Error: Application failed to initialize" << std::endl;
+        log::e << "Error: Application failed to initialize" << log::endl;
         goto termTw;
     }
 
