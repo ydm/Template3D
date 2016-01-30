@@ -1,9 +1,11 @@
-#ifndef __EULER_ROTATOR_HPP__
-#define __EULER_ROTATOR_HPP__
+#ifndef __T3D_EULER_ROTATOR_HPP__
+#define __T3D_EULER_ROTATOR_HPP__
 
 #include "Rotator.hpp"
-#include <AntTweakBar.h>
 
+
+namespace t3d
+{
 
 class EulerRotator : public Rotator
 {
@@ -15,4 +17,6 @@ public:
 	virtual glm::mat4 rotate() override;
 };
 
-#endif // __EULER_ROTATOR_HPP__
+} // namespace
+
+#endif // __T3D_EULER_ROTATOR_HPP__

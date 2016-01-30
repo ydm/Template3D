@@ -1,10 +1,13 @@
-#ifndef __ORTHOGRAPHIC_APP_HPP__
-#define __ORTHOGRAPHIC_APP_HPP__
+#ifndef __T3D_ORTHOGRAPHIC_APP_HPP__
+#define __T3D_ORTHOGRAPHIC_APP_HPP__
 
 #include "IApp.hpp"
 #include "DrawableManager.hpp"
 #include "MandelbrotDrawable.hpp"
 
+
+namespace t3d
+{
 
 class OrthographicApp : public IApp
 {
@@ -14,7 +17,7 @@ public:
 
     virtual bool init() override;
     virtual void terminate() override;
-    
+
     /**
      * Update routine.  Returns true on state change.
      */
@@ -38,4 +41,6 @@ protected:
     float zoom_;
 };
 
-#endif // __ORTHOGRAPHIC_APP_HPP__
+} // namespace
+
+#endif // __T3D_ORTHOGRAPHIC_APP_HPP__

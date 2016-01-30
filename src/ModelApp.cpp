@@ -1,10 +1,10 @@
 #include "ModelApp.hpp"
-#include <iostream>
-#include <GLFW/glfw3.h>
-#include "glm/ext.hpp"
 #include "ModelDrawable.hpp"
 #include "TripodDrawable.hpp"
 
+
+namespace t3d
+{
 
 // ========================
 // EulerAnglesApp
@@ -34,3 +34,5 @@ bool ModelApp::init()
     drawables_.setViewMatrix(glm::value_ptr(camera_.getViewMatrix()));
     return true;
 }
+
+} // namespace t3d

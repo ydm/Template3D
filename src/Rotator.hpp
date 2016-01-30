@@ -1,9 +1,12 @@
-#ifndef __ROTATOR_HPP__
-#define __ROTATOR_HPP__
+#ifndef __T3D_ROTATOR_HPP__
+#define __T3D_ROTATOR_HPP__
 
-#include "glm/glm.hpp"
+#include "default.hpp"
 #include <AntTweakBar.h>
 
+
+namespace t3d
+{
 
 class Rotator
 {
@@ -16,8 +19,10 @@ public:
     virtual glm::mat4 rotate() = 0;
 
 protected:
-	glm::vec3 angles_;
-	TwBar *bar_;
+    glm::vec3 angles_;
+    TwBar *bar_;
 };
 
-#endif // __ROTATOR_HPP__
+} // namespace
+
+#endif // __T3D_ROTATOR_HPP__

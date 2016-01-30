@@ -1,10 +1,13 @@
 #include "OrthographicApp.hpp"
 #include <AntTweakBar.h>
-#include <iostream>
-#include <GLFW/glfw3.h>
-#include "glm/ext.hpp"
 #include "MandelbrotDrawable.hpp"
 
+
+// TODO: CURRENTLY COUPLED WITH MANDELBROT!
+
+
+namespace t3d
+{
 
 // ========================
 // OrthographicApp
@@ -122,3 +125,6 @@ void OrthographicApp::draw()
 {
     drawables_.draw();
 }
+
+} // namespace
+

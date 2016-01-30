@@ -7,9 +7,8 @@
 namespace t3d
 {
 
-// Camera is declared as a friend class and has to be
-// forward-declared.
 class Camera;
+
 
 /**
  *

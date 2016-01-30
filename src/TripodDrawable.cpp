@@ -5,35 +5,40 @@
 
 namespace
 {
-	const GLfloat tripodPoints[] = {
-		// X
-		0.0f, 0.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
 
-		// Y
-		0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f,
+const GLfloat tripodPoints[] = {
+    // X
+    0.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
 
-		// Z
-		0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f,
-	};
+    // Y
+    0.0f, 0.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
 
-	const GLfloat tripodColors[] = {
-		// X
-		1.0f, 0.5f, 0.5f,
-		1.0f, 0.5f, 0.5f,
+    // Z
+    0.0f, 0.0f, 0.0f,
+    0.0f, 0.0f, 1.0f,
+};
 
-		// Y
-		0.5f, 1.0f, 0.5f,
-		0.5f, 1.0f, 0.5f,
+const GLfloat tripodColors[] = {
+    // X
+    1.0f, 0.5f, 0.5f,
+    1.0f, 0.5f, 0.5f,
 
-		// Z
-		0.5f, 0.5f, 1.0f,
-		0.5f, 0.5f, 1.0f,
-	};
-}
+    // Y
+    0.5f, 1.0f, 0.5f,
+    0.5f, 1.0f, 0.5f,
 
+    // Z
+    0.5f, 0.5f, 1.0f,
+    0.5f, 0.5f, 1.0f,
+};
+
+} // namespace
+
+
+namespace t3d
+{
 
 TripodDrawable::TripodDrawable(const float scale, Rotator *const rotator)
 : Drawable()
@@ -50,7 +55,7 @@ TripodDrawable::TripodDrawable(const float scale, Rotator *const rotator)
 
 TripodDrawable::~TripodDrawable()
 {
-	delete rotator_;
+    delete rotator_;
 }
 
 
@@ -58,7 +63,7 @@ bool TripodDrawable::init()
 {
     if (!Drawable::init())
     {
-	    return false;
+        return false;
     }
 
     if (rotator_ != nullptr && !rotator_->init())
@@ -84,9 +89,9 @@ bool TripodDrawable::init()
 	// Location 1: Vertex color
 	glBindBuffer(GL_ARRAY_BUFFER, vbo_[1]);
 	{
-		glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), tripodColors, GL_STATIC_DRAW);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-		glEnableVertexArrayAttrib(vao_, 1);
+            glBufferData(GL_ARRAY_BUFFER, 18 * sizeof(GLfloat), tripodColors, GL_STATIC_DRAW);
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+            glEnableVertexArrayAttrib(vao_, 1);
 	}
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
@@ -173,3 +178,5 @@ void TripodDrawable::drawWithShader()
     glDrawArrays(GL_LINES, 0, 6);
     glBindVertexArray(0);
 }
+
+} // namespace

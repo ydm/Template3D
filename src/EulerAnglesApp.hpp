@@ -1,11 +1,11 @@
-#ifndef __EULER_APP_HPP__
-#define __EULER_APP_HPP__
+#ifndef __T3D_EULER_APP_HPP__
+#define __T3D_EULER_APP_HPP__
 
 #include "BaseApp.hpp"
-#include <AntTweakBar.h>
-#include "Camera.hpp"
-#include "DrawableManager.hpp"
 
+
+namespace t3d
+{
 
 class EulerAnglesApp : public BaseApp
 {
@@ -16,4 +16,6 @@ public:
     virtual bool init() override;
 };
 
-#endif // __EULER_APP_HPP__
+} // namespace
+
+#endif // __T3D_EULER_APP_HPP__

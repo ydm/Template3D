@@ -1,42 +1,50 @@
-#ifndef __DRAWABLE_HPP__
-#define __DRAWABLE_HPP__
+#ifndef __T3D_DRAWABLE_HPP__
+#define __T3D_DRAWABLE_HPP__
 
-#include <string>
-#include <GL/glew.h>
-#include "glm/glm.hpp"
+#include "default.hpp"
 #include "shaders.hpp"
+
+
+namespace t3d
+{
 
 class DrawableManager;
 
+
+/**
+ * Drawables are managed by an instance of DrawableManager.
+ */
 class Drawable
 {
 public:
-	Drawable();
-	virtual ~Drawable();
+    Drawable();
+    virtual ~Drawable();
 
-	virtual bool init();
-	virtual void terminate();
-
-	virtual void draw();
-	virtual bool update(const float dt);
-
-	virtual void setProjectionMatrix(const GLfloat *const M);
-	virtual void setViewMatrix(const GLfloat *const M);
-	virtual void setModelMatrix(const GLfloat *const M);
-	virtual void setUniformFloat(const GLchar *const name, const GLfloat value);
-	virtual void setUniformVec2(const GLchar *const name, const GLfloat *const vec);
+    void setModelMatrix(const GLfloat *const M);
+    void setProjectionMatrix(const GLfloat *const M);
+    void setViewMatrix(const GLfloat *const M);
+    void setUniformFloat(const GLchar *const name, const GLfloat value);
+    void setUniformVec2(const GLchar *const name, const GLfloat *const vec);
 
 protected:
-	virtual bool addShaders() = 0;
-	virtual void drawWithShader() = 0;
+    virtual bool init();
+    virtual void terminate();
+    virtual bool update(const float dt);
 
-	bool addShader(const GLuint type, const std::string& source);
+    virtual bool addShaders() = 0;
+    virtual void drawWithShader() = 0;
+
+    bool addShader(const GLuint type, const std::string& source);
 
 private:
-	shaders::Program program_;
-	Drawable *next_;
+    void draw();
 
-	friend class DrawableManager;
+    shaders::Program program_;
+    Drawable *next_;
+
+    friend class DrawableManager;
 };
 
-#endif // __DRAWABLE_HPP__
+} // namespace
+
+#endif // __T3D_DRAWABLE_HPP__

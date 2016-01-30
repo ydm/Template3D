@@ -1,6 +1,5 @@
 #include "Camera.hpp"
 #include <algorithm>
-#include "glm/ext.hpp"
 
 
 namespace t3d
@@ -11,10 +10,10 @@ namespace t3d
 // ========================
 namespace
 {
-    const float NEAR_PLANE = 0.1f;
-    const float FAR_PLANE = 1000.0f;
-    const float FOVY = glm::radians(70.0f);
-    // const float MAXPOS = 100.0f;
+const float NEAR_PLANE = 0.1f;
+const float FAR_PLANE = 1000.0f;
+const float FOVY = glm::radians(70.0f);
+// const float MAXPOS = 100.0f;
 }
 
 
@@ -22,7 +21,8 @@ namespace
 // Helpers
 // ========================
 
-glm::vec2 computePlaneSize(const float fovyRad, const float distance, const float aspect)
+glm::vec2 computePlaneSize(const float fovyRad, const float distance,
+                           const float aspect)
 {
     const float height = 2.0f * distance * glm::tan(fovyRad / 2);
     const float width = height * aspect;
@@ -82,8 +82,8 @@ bool Camera::update(const float dt)
 // Walking
 // ========================
 
-void Camera::walk       (const enum Direction dir) {directions_[dir] =  true;}
-void Camera::stopWalking(const enum Direction dir) {directions_[dir] = false;}
+void Camera::walk       (const enum Direction dir) { directions_[dir] =  true; }
+void Camera::stopWalking(const enum Direction dir) { directions_[dir] = false; }
 
 
 // ========================
@@ -190,7 +190,7 @@ glm::vec3 Camera::getMouseRay(const int x, const int y) const
     const glm::vec4 directionInCameraSpace(xp * half.x, yp * half.y, -NEAR_PLANE, 0);
     const glm::vec4 directionInWorldSpace = Rinv_ * directionInCameraSpace;
     const glm::vec3 v3 = glm::vec3(directionInWorldSpace);
-    
+
     // return glm::fastNormalize(v3);
     return glm::normalize(v3);
 }
@@ -268,7 +268,7 @@ Camera::getCameraFrustum() const
     frustum->planes_[3] = Plane(fbr, fbl, nbr);  // Bottom plane
     frustum->planes_[4] = Plane(nbr, nbl, ntr);  // Near plane
     frustum->planes_[5] = Plane(fbr, ftr, fbl);  // Far plane
-    
+
     return frustum;
 }
 
@@ -289,8 +289,8 @@ void Camera::addToRotation(const float rx, const float ry, const float rz)
     rotation_[2] += rz;
 
     R_  = (rotation_[0] ? glm::rotate(rotation_[0], vx) : I) *
-          (rotation_[1] ? glm::rotate(rotation_[1], vy) : I) *
-          (rotation_[2] ? glm::rotate(rotation_[2], vz) : I);
+        (rotation_[1] ? glm::rotate(rotation_[1], vy) : I) *
+        (rotation_[2] ? glm::rotate(rotation_[2], vz) : I);
     Rinv_ = glm::transpose(R_);
 }
 

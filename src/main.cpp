@@ -4,7 +4,7 @@
 #include "default.hpp"
 // #include "ModelApp.hpp"
 // #include "OrthographicApp.hpp"
-#include "EulerAnglesApp.hpp"
+// #include "EulerAnglesApp.hpp"
 
 
 // ========================
@@ -16,7 +16,7 @@ namespace
 
 // ModelApp gApplication;
 // OrthographicApp gApplication;
-EulerAnglesApp gApplication;
+t3d::EulerAnglesApp gApplication;
 double gCursorPositionY = 0.0;
 
 
@@ -26,10 +26,10 @@ double gCursorPositionY = 0.0;
  */
 void charCallback(GLFWwindow *const window, const unsigned int codepoint)
 {
-        if (!TwEventCharGLFW(codepoint, GLFW_PRESS))
-        {
-		gApplication.onChar(codepoint);
-        }
+    if (!TwEventCharGLFW(codepoint, GLFW_PRESS))
+    {
+        gApplication.onChar(codepoint);
+    }
 }
 
 
@@ -38,32 +38,33 @@ void charCallback(GLFWwindow *const window, const unsigned int codepoint)
  *  @param[in] xpos The new x-coordinate, in screen coordinates, of the cursor.
  *  @param[in] ypos The new y-coordinate, in screen coordinates, of the cursor.
  */
-void cursorPositionCallback(GLFWwindow *const window, const double xpos, const double ypos)
+void cursorPositionCallback(GLFWwindow *const window,
+                            const double xpos, const double ypos)
 {
-        gCursorPositionY = ypos;
-        if (!TwEventMousePosGLFW(static_cast<int>(xpos), static_cast<int>(ypos)))
-        {
-		gApplication.onCursorPosition(xpos, ypos);
-        }
+    gCursorPositionY = ypos;
+    if (!TwEventMousePosGLFW(static_cast<int>(xpos), static_cast<int>(ypos)))
+    {
+        gApplication.onCursorPosition(xpos, ypos);
+    }
 }
 
 
 void display(GLFWwindow *const window)
 {
-	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	TwDraw();
-	gApplication.draw();
-	glfwSwapBuffers(window);
+    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    TwDraw();
+    gApplication.draw();
+    glfwSwapBuffers(window);
 }
 
 
 bool initOpenGL()
 {
-        glEnable(GL_DEPTH_TEST);
-        glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	return glGetError() == GL_NO_ERROR;
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    return glGetError() == GL_NO_ERROR;
 }
 
 
@@ -75,12 +76,13 @@ bool initOpenGL()
  *  @param[in] mods Bit field describing which [modifier keys](@ref mods) were
  *  held down.
  */
-void keyCallback(GLFWwindow *const window, const int key, const int scancode, const int action, const int mods)
+void keyCallback(GLFWwindow *const window, const int key,
+                 const int scancode, const int action, const int mods)
 {
-	if (TwEventKeyGLFW(key, action) == 0)
-	{
-		gApplication.onKey(key, scancode, action, mods);
-	}
+    if (TwEventKeyGLFW(key, action) == 0)
+    {
+        gApplication.onKey(key, scancode, action, mods);
+    }
 }
 
 
@@ -95,18 +97,18 @@ void keyCallback(GLFWwindow *const window, const int key, const int scancode, co
  */
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-        if (!TwEventMouseButtonGLFW(button, action))
-        {
-		gApplication.onMouseButton(button, action, mods);
-        }
+    if (!TwEventMouseButtonGLFW(button, action))
+    {
+        gApplication.onMouseButton(button, action, mods);
+    }
 }
 
 
 void resizeCallback(GLFWwindow *const window, const int width, const int height)
 {
-        glViewport(0, 0, width, height);
-        TwWindowSize(width, height);
-        gApplication.onResize(width, height);
+    glViewport(0, 0, width, height);
+    TwWindowSize(width, height);
+    gApplication.onResize(width, height);
 }
 
 
@@ -122,12 +124,13 @@ void resizeCallback(GLFWwindow *const window, const int width, const int height)
  *
  *  @ingroup input
  */
-void scrollCallback(GLFWwindow *const window, const double xoffset, const double yoffset)
+void scrollCallback(GLFWwindow *const window,
+                    const double xoffset, const double yoffset)
 {
-        if (!TwEventMouseWheelGLFW(static_cast<int>(gCursorPositionY)))
-        {
-		gApplication.onScroll(xoffset, yoffset);
-        }
+    if (!TwEventMouseWheelGLFW(static_cast<int>(gCursorPositionY)))
+    {
+        gApplication.onScroll(xoffset, yoffset);
+    }
 }
 
 } // namespace
@@ -145,137 +148,139 @@ void scrollCallback(GLFWwindow *const window, const double xoffset, const double
 // 5. Application
 int main(int argc, char *argv[])
 {
-	static const char *const TITLE  = "Template";
-	static const int         WIDTH  = 800;
-	static const int         HEIGHT = 800;
+    static const char *const TITLE  = "Template";
+    static const int         WIDTH  = 800;
+    static const int         HEIGHT = 800;
 
-	GLFWwindow *window = nullptr;
-	GLenum ret;
-	std::chrono::system_clock::time_point lastUpdate;
-
-
-	// 1. Init GLFW
-	// ============
-	if (!glfwInit())
-	{
-		std::cerr << "Error: glfwInit() failed" << std::endl;
-		return 0;
-	}
+    GLFWwindow *window = nullptr;
+    GLenum ret;
+    std::chrono::system_clock::time_point lastUpdate;
 
 
-	// 2. Create window
-	// ================
-	window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, nullptr, nullptr);
-	if (!window)
-	{
-		std::cerr << "Error: glfwCreateWindow() failed" << std::endl;
-		goto termGlfw;
-	}
-    
-	// Set as default OpenGL context
-	glfwMakeContextCurrent(window);
-
-	// Setup callbacks
-	glfwSetCharCallback(window, charCallback);
-	glfwSetCursorPosCallback(window, cursorPositionCallback);
-	glfwSetKeyCallback(window, keyCallback);
-	glfwSetMouseButtonCallback(window, mouseButtonCallback);
-	glfwSetFramebufferSizeCallback(window, resizeCallback);
-	glfwSetScrollCallback(window, scrollCallback);
+    // 1. Init GLFW
+    // ============
+    if (!glfwInit())
+    {
+        std::cerr << "Error: glfwInit() failed" << std::endl;
+        return 0;
+    }
 
 
-	// 3. Init GLEW and OpenGL
-	// =======================
-	ret = glewInit();
-	if (ret != GLEW_OK)
-	{
-		std::cerr << "Error: " << glewGetErrorString(ret) << std::endl;
-		goto termWin;
-	}
-	if (!initOpenGL())
-	{
-		std::cerr << "Error: initOpenGL failed: " /* << gluErrorString(glGetError()) */ << std::endl;
-		return 0;
-	}
-	// Print OpenGL versions
-	std::cout << "OpenGL " << glGetString(GL_VERSION) << ", "
-		  << "GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+    // 2. Create window
+    // ================
+    window = glfwCreateWindow(WIDTH, HEIGHT, TITLE, nullptr, nullptr);
+    if (!window)
+    {
+        std::cerr << "Error: glfwCreateWindow() failed" << std::endl;
+        goto termGlfw;
+    }
+
+    // Set as default OpenGL context
+    glfwMakeContextCurrent(window);
+
+    // Setup callbacks
+    glfwSetCharCallback(window, charCallback);
+    glfwSetCursorPosCallback(window, cursorPositionCallback);
+    glfwSetKeyCallback(window, keyCallback);
+    glfwSetMouseButtonCallback(window, mouseButtonCallback);
+    glfwSetFramebufferSizeCallback(window, resizeCallback);
+    glfwSetScrollCallback(window, scrollCallback);
 
 
-	// 4. Init AntTweakBar
-	// ===================
-	if (!TwInit(TW_OPENGL, nullptr))
-	{
-		std::cerr << "Error: TwInit() failed" << std::endl;
-		goto termWin;
-	}
-    
-
-	// 5. Initialize main application object and resize initially
-	// ==========================================================
-	if (!gApplication.init())
-	{
-		std::cerr << "Error: Application failed to initialize" << std::endl;
-		goto termTw;
-	}
-
-	do
-	{
-		int width = WIDTH, height = HEIGHT;
-		glfwGetFramebufferSize(window, &width, &height);
-		resizeCallback(window, width, height);
-	}
-	while (0);
+    // 3. Init GLEW and OpenGL
+    // =======================
+    ret = glewInit();
+    if (ret != GLEW_OK)
+    {
+        std::cerr << "Error: " << glewGetErrorString(ret) << std::endl;
+        goto termWin;
+    }
+    if (!initOpenGL())
+    {
+        // TODO: Use log
+        std::cerr << "Error: initOpenGL failed: " /* << gluErrorString(glGetError()) */ << std::endl;
+        return 0;
+    }
+    // Print OpenGL versions
+    // TODO: Use log
+    std::cout << "OpenGL " << glGetString(GL_VERSION) << ", "
+              << "GLSL " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
 
-	// Main loop
-	// =========
-    
-	// Draw initially
-
-	lastUpdate = std::chrono::system_clock::now();
-	gApplication.update(0.0f);
-	display(window);
-
-	// Loop
-	while (!glfwWindowShouldClose(window))
-	{
-		// Invoke registered event callbacks.
-		glfwPollEvents();
-
-		// Update the application state.
-		const auto now = std::chrono::system_clock::now();
-		const std::chrono::duration<float> dt = now - lastUpdate;
-		const bool updated = gApplication.update(dt.count());
-		lastUpdate = now;
-
-		// Draw
-		if (true /* updated */)
-		{
-			display(window);
-		}
-	}
+    // 4. Init AntTweakBar
+    // ===================
+    if (!TwInit(TW_OPENGL, nullptr))
+    {
+        std::cerr << "Error: TwInit() failed" << std::endl;
+        goto termWin;
+    }
 
 
-	// Exit sequence
-	// =============
+    // 5. Initialize main application object and resize initially
+    // ==========================================================
+    if (!gApplication.init())
+    {
+        std::cerr << "Error: Application failed to initialize" << std::endl;
+        goto termTw;
+    }
 
-	// 5. Terminate application
-	gApplication.terminate();
+    do
+    {
+        int width = WIDTH, height = HEIGHT;
+        glfwGetFramebufferSize(window, &width, &height);
+        resizeCallback(window, width, height);
+    }
+    while (0);
 
-	// 4. Terminate ATB
+
+    // Main loop
+    // =========
+
+    // Draw initially
+
+    lastUpdate = std::chrono::system_clock::now();
+    gApplication.update(0.0f);
+    display(window);
+
+    // Loop
+    while (!glfwWindowShouldClose(window))
+    {
+        // Invoke registered event callbacks.
+        glfwPollEvents();
+
+        // Update the application state.
+        const auto now = std::chrono::system_clock::now();
+        const std::chrono::duration<float> dt = now - lastUpdate;
+        const bool updated = gApplication.update(dt.count());
+        lastUpdate = now;
+
+        // Draw
+        if (true /* updated */)
+        {
+            display(window);
+        }
+    }
+
+
+    // Exit sequence
+    // =============
+
+    // 5. Terminate application
+    gApplication.terminate();
+
+    // 4. Terminate ATB
 termTw:
-	TwTerminate();
+    TwTerminate();
 
-	// 3. Terminate GLEW
+    // 3. Terminate GLEW
 
-	// 2. Terminate Window
+    // 2. Terminate Window
 termWin:
-	glfwDestroyWindow(window);
+    glfwDestroyWindow(window);
 
-	// 1. Terminate glfw
+    // 1. Terminate glfw
 termGlfw:
-	glfwTerminate();
+    glfwTerminate();
 
-	return 0;
+    return 0;
 }

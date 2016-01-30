@@ -1,15 +1,19 @@
 #include "AxisRotator.hpp"
-#include "glm/ext.hpp"
 
 
 namespace
 {
-    float rad(const float r)
-    {
-        return r * glm::pi<float>();
-    }
+
+float rad(const float r)
+{
+    return r * glm::pi<float>();
 }
 
+} // namespace
+
+
+namespace t3d
+{
 
 AxisRotator::AxisRotator()
 : Rotator()
@@ -26,7 +30,7 @@ bool AxisRotator::init()
 {
     // Setup tweak bar
     bar_ = TwNewBar("Axis Rotation");
-    
+
     // TwDefine(" GLOBAL help='' ");
     // keyIncr=s keyDecr=S
     TwAddVarRW(bar_, "Z", TW_TYPE_FLOAT, &angles_[0], " label='Z' min=-2 max=2 step=0.01 ");
@@ -43,8 +47,9 @@ glm::mat4 AxisRotator::rotate()
     static const glm::vec3 Y(0.0f, 1.0f, 0.0f);
     static const glm::vec3 Z(0.0f, 0.0f, 1.0f);
 
-    // return glm::rota
     return glm::rotate(rad(angles_[0]), Z)
-         * glm::rotate(rad(angles_[1]), X)
-         * glm::rotate(rad(angles_[2]), Y);
+        * glm::rotate(rad(angles_[1]), X)
+        * glm::rotate(rad(angles_[2]), Y);
 }
+
+} // namespace

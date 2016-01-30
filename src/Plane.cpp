@@ -36,8 +36,8 @@ Plane& Plane::operator=(const Plane& other)
 {
     if (this != &other)
     {
-	d_ = other.d_;
-	n_ = other.n_;
+        d_ = other.d_;
+        n_ = other.n_;
     }
     return *this;
 }
@@ -56,19 +56,19 @@ Plane::getNormal() const
 }
 
 
-void Plane::setPlane(const glm::vec3& one, const glm::vec3& two, const glm::vec3& three)
+void Plane::setPlane(const glm::vec3& a, const glm::vec3& b,const glm::vec3& c)
 {
-    const glm::vec3& v = two - one;
-    const glm::vec3& u = three - one;
+    const glm::vec3& v = b - a;
+    const glm::vec3& u = c - a;
     // n_ = glm::fastNormalize(glm::cross(v, u));
     n_ = glm::normalize(glm::cross(v, u));
-    d_ = -glm::dot(n_, one);
+    d_ = -glm::dot(n_, a);
 }
 
 
-void Plane::setPlane(const glm::vec4& one, const glm::vec4& two, const glm::vec4& three)
+void Plane::setPlane(const glm::vec4& a, const glm::vec4& b, const glm::vec4& c)
 {
-    setPlane(glm::vec3(one), glm::vec3(two), glm::vec3(three));
+    setPlane(glm::vec3(a), glm::vec3(b), glm::vec3(c));
 }
 
 

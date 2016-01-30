@@ -1,6 +1,8 @@
 #include "Rotator.hpp"
-#include "glm/ext.hpp"
 
+
+namespace t3d
+{
 
 Rotator::Rotator()
 : angles_(0.0f)
@@ -27,3 +29,5 @@ void Rotator::terminate()
         TwDeleteBar(bar_);
     }
 }
+
+} // namespace

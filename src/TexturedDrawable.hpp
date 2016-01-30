@@ -5,6 +5,9 @@
 #include "Drawable.hpp"
 
 
+namespace t3d
+{
+
 class TexturedDrawable : public Drawable
 {
 public:
@@ -13,8 +16,8 @@ public:
 
 	virtual bool init() override;
 	virtual void terminate() override;
-
 	virtual bool update(const float dt) override;
+
         void setPosition(const glm::vec3& pos);
 
 protected:
@@ -27,5 +30,7 @@ private:
 	glm::mat4 M_;
 	BMPReader reader_;
 };
+
+} // namespace
 
 #endif // __TEXTURED_DRAWABLE_HPP__

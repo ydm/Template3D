@@ -1,11 +1,11 @@
-#ifndef __MODEL_APP_HPP__
-#define __MODEL_APP_HPP__
+#ifndef __T3D_MODEL_APP_HPP__
+#define __T3D_MODEL_APP_HPP__
 
 #include "BaseApp.hpp"
-#include <AntTweakBar.h>
-#include "Camera.hpp"
-#include "DrawableManager.hpp"
 
+
+namespace t3d
+{
 
 class ModelApp : public BaseApp
 {
@@ -16,4 +16,6 @@ public:
     virtual bool init() override;
 };
 
-#endif // __MODEL_APP_HPP__
+} // namespace
+
+#endif // __T3D_MODEL_APP_HPP__

@@ -1,20 +1,17 @@
 #include "BaseApp.hpp"
-#include <iostream>
-#include <GLFW/glfw3.h>
-#include "glm/ext.hpp"
+#include <AntTweakBar.h>
 
 
-// TODO
-using namespace t3d;
-
+namespace t3d
+{
 
 // ========================
 // BaseApp
 // ========================
 
 BaseApp::BaseApp()
-    : camera_()
-    , drawables_()
+: camera_()
+, drawables_()
 {
 }
 
@@ -128,3 +125,5 @@ void BaseApp::draw()
 {
     drawables_.draw();
 }
+
+} // namespace

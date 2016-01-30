@@ -1,6 +1,8 @@
 #include "IApp.hpp"
-#include <iostream>
 
+
+namespace t3d
+{
 
 // ========================
 // IApp
@@ -68,3 +70,5 @@ void IApp::onScroll(const double xoffset, const double yoffset)
 void IApp::draw()
 {
 }
+
+} // namespace

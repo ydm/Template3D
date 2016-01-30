@@ -1,6 +1,10 @@
 #ifndef __IAPP_HPP__
 #define __IAPP_HPP__
 
+
+namespace t3d
+{
+
 class IApp
 {
 public:
@@ -21,5 +25,7 @@ public:
     // Draw routine
     virtual void draw();
 };
+
+} // namespace
 
 #endif // __APP_HPP__

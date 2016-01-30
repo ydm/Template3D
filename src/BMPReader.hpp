@@ -1,8 +1,15 @@
-#ifndef __BMP_READER_HPP__
-#define __BMP_READER_HPP__
+#ifndef __T3D_BMP_READER_HPP__
+#define __T3D_BMP_READER_HPP__
 
 #include <string>
 
+namespace t3d
+{
+
+/**
+ * Reads a BMP image and converts it to a convenient format for use as
+ * OpenGL texture.
+ */
 class BMPReader
 {
 public:
@@ -19,4 +26,6 @@ public:
   unsigned char *data;
 };
 
-#endif // __BMP_READER_HPP__
+} // namespace
+
+#endif // __T3D_BMP_READER_HPP__

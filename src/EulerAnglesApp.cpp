@@ -1,11 +1,11 @@
 #include "EulerAnglesApp.hpp"
-#include <iostream>
-#include <GLFW/glfw3.h>
-#include "glm/ext.hpp"
 #include "AxisRotator.hpp"
 #include "EulerRotator.hpp"
 #include "TripodDrawable.hpp"
 
+
+namespace t3d
+{
 
 // ========================
 // EulerAnglesApp
@@ -28,7 +28,7 @@ bool EulerAnglesApp::init()
     {
         return false;
     }
-    
+
     {
         // Euler rotation: black tripod
         TripodDrawable *const b = new TripodDrawable();
@@ -54,8 +54,10 @@ bool EulerAnglesApp::init()
         drawables_.addDrawable(d);
         d->setPosition(glm::vec3(1.5f, 0.0f, 0.0f));
     }
-    
+
     drawables_.setViewMatrix(glm::value_ptr(camera_.getViewMatrix()));
 
     return true;
 }
+
+} // namespace

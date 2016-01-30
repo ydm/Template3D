@@ -1,5 +1,4 @@
 #include "EulerRotator.hpp"
-#include "glm/ext.hpp"
 
 
 namespace
@@ -7,11 +6,14 @@ namespace
 
 float rad(const float r)
 {
-        return r * glm::pi<float>();
+    return r * glm::pi<float>();
 }
 
 } // namespace
 
+
+namespace t3d
+{
 
 EulerRotator::EulerRotator()
 : Rotator()
@@ -47,6 +49,8 @@ glm::mat4 EulerRotator::rotate()
     static const glm::vec3 Z(0.0f, 0.0f, 1.0f);
 
     return glm::rotate(rad(angles_[0]), Y)
-         * glm::rotate(rad(angles_[1]), X)
-         * glm::rotate(rad(angles_[2]), Z);
+        * glm::rotate(rad(angles_[1]), X)
+        * glm::rotate(rad(angles_[2]), Z);
 }
+
+} // namespace

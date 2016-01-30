@@ -18,7 +18,7 @@ public:
     Plane(const glm::vec4& one, const glm::vec4& two, const glm::vec4& three);
     virtual ~Plane();
     Plane& operator=(const Plane& other);
-    
+
     float distance(const glm::vec3& v) const;
     const glm::vec3& getNormal() const;
 
@@ -33,6 +33,5 @@ private:
 };
 
 } // namespace
-
 
 #endif // __T3D_PLANE_HPP__

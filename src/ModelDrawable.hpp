@@ -1,10 +1,12 @@
-#ifndef __MODEL_DRAWABLE_HPP__
-#define __MODEL_DRAWABLE_HPP__
+#ifndef __T3D_MODEL_DRAWABLE_HPP__
+#define __T3D_MODEL_DRAWABLE_HPP__
 
-#include <string>
-#include <assimp/scene.h>
 #include "Drawable.hpp"
+#include <assimp/scene.h>
 
+
+namespace t3d
+{
 
 class ModelDrawable : public Drawable
 {
@@ -28,4 +30,6 @@ private:
 	GLuint vbo_[3];
 };
 
-#endif // __MODEL_DRAWABLE_HPP__
+} // namespace
+
+#endif // __T3D_MODEL_DRAWABLE_HPP__
