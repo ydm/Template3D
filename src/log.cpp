@@ -11,31 +11,31 @@ namespace
 
 void verboseLogHandler(const std::ostringstream& stream)
 {
-    std::cout << "[log/v] " << stream.str();
+    std::cout << "[V] " << stream.str();
 }
 
 
 void debugLogHandler(const std::ostringstream& stream)
 {
-    std::cout << "[log/d] " << stream.str();
+    std::cout << "[D] " << stream.str();
 }
 
 
 void infoLogHandler(const std::ostringstream& stream)
 {
-    std::cout << "[log/i] " << stream.str();
+    std::cout << "[I] " << stream.str();
 }
 
 
 void warningLogHandler(const std::ostringstream& stream)
 {
-    std::cout << "[log/w] " << stream.str();
+    std::cout << "[W] " << stream.str();
 }
 
 
 void errorLogHandler(const std::ostringstream& stream)
 {
-    std::cout << "[log/e] " << stream.str();
+    std::cout << "[E] " << stream.str();
 }
 
 } // namespace

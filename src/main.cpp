@@ -1,10 +1,6 @@
 #include "default.hpp"
 #include <chrono>
 #include <AntTweakBar.h>
-// #include "ModelApp.hpp"
-// #include "OrthographicApp.hpp"
-// #include "examples/EulerAnglesApp.hpp"
-#include "examples/EmbreeApp.hpp"
 
 
 // ========================
@@ -15,9 +11,6 @@ namespace
 {
 
 // ModelApp gApplication;
-// OrthographicApp gApplication;
-// t3d::EulerAnglesApp gApplication;
-t3d::EmbreeApp gApplication;
 double gCursorPositionY = 0.0;
 
 
@@ -29,7 +22,7 @@ void charCallback(GLFWwindow *const window, const unsigned int codepoint)
 {
     if (!TwEventCharGLFW(codepoint, GLFW_PRESS))
     {
-        gApplication.onChar(codepoint);
+        // gApplication.onChar(codepoint);
     }
 }
 
@@ -45,7 +38,7 @@ void cursorPositionCallback(GLFWwindow *const window,
     gCursorPositionY = ypos;
     if (!TwEventMousePosGLFW(static_cast<int>(xpos), static_cast<int>(ypos)))
     {
-        gApplication.onCursorPosition(xpos, ypos);
+        // gApplication.onCursorPosition(xpos, ypos);
     }
 }
 
@@ -57,7 +50,7 @@ void display(GLFWwindow *const window)
     TwDraw();
     // if (updated)
     // {
-        gApplication.draw();
+    // gApplication.draw();
     // }
     glfwSwapBuffers(window);
 }
@@ -85,7 +78,7 @@ void keyCallback(GLFWwindow *const window, const int key,
 {
     if (TwEventKeyGLFW(key, action) == 0)
     {
-        gApplication.onKey(key, scancode, action, mods);
+        // gApplication.onKey(key, scancode, action, mods);
     }
 }
 
@@ -103,7 +96,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
     if (!TwEventMouseButtonGLFW(button, action))
     {
-        gApplication.onMouseButton(button, action, mods);
+        // gApplication.onMouseButton(button, action, mods);
     }
 }
 
@@ -112,7 +105,7 @@ void resizeCallback(GLFWwindow *const window, const int width, const int height)
 {
     glViewport(0, 0, width, height);
     TwWindowSize(width, height);
-    gApplication.onResize(width, height);
+    // gApplication.onResize(width, height);
 }
 
 
@@ -133,7 +126,7 @@ void scrollCallback(GLFWwindow *const window,
 {
     if (!TwEventMouseWheelGLFW(static_cast<int>(gCursorPositionY)))
     {
-        gApplication.onScroll(xoffset, yoffset);
+        // gApplication.onScroll(xoffset, yoffset);
     }
 }
 
@@ -222,11 +215,11 @@ int main(int argc, char *argv[])
 
     // 5. Initialize main application object and resize initially
     // ==========================================================
-    if (!gApplication.init())
-    {
-        log::e << "Error: Application failed to initialize" << log::endl;
-        goto termTw;
-    }
+    // if (!gApplication.init())
+    // {
+    //     log::e << "Error: Application failed to initialize" << log::endl;
+    //     goto termTw;
+    // }
 
     do
     {
@@ -242,7 +235,7 @@ int main(int argc, char *argv[])
 
     // Draw initially
     lastUpdate = std::chrono::system_clock::now();
-    gApplication.update(0.0f);
+    // gApplication.update(0.0f);
     display(window);
 
     // Loop
@@ -255,7 +248,7 @@ int main(int argc, char *argv[])
         const auto now = std::chrono::system_clock::now();
         const std::chrono::duration<float> dt = now - lastUpdate;
         /* const bool updated = */
-        gApplication.update(dt.count());
+        // gApplication.update(dt.count());
         lastUpdate = now;
 
         // Draw
@@ -267,7 +260,7 @@ int main(int argc, char *argv[])
     // =============
 
     // 5. Terminate application
-    gApplication.terminate();
+    // gApplication.terminate();
 
     // 4. Terminate ATB
 termTw:

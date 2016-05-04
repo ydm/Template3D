@@ -2,7 +2,6 @@
 
 // Standard libraries
 #include <cassert>
-#include <iostream>
 #include <string>
 
 // OpenGL
@@ -21,10 +20,10 @@
 // T3D
 #include "log.hpp"
 
-// Silence MSVC warnings
-#if defined(_WIN32) && defined(_MSC_VER)
-#  pragma warning (push)
-#  pragma warning (disable : 4996)  // unsafe function or variable
-#endif
+// // Silence MSVC warnings
+// #if defined(_WIN32) && defined(_MSC_VER)
+// #  pragma warning (push)
+// #  pragma warning (disable : 4996)  // unsafe function or variable
+// #endif
 
 #endif // __T3D_DEFAULT_HPP__
