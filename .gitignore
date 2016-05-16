@@ -1,4 +1,4 @@
-# CMake
+# github/gitignore/cmake
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
@@ -8,3 +8,6 @@ install_manifest.txt
 
 # Executables
 Template
+
+# Compile commands
+compile_commands.json

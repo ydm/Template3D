@@ -1,5 +1,5 @@
 #include "log.hpp"
-#include <iostream>
+#include <cstdio>
 
 
 namespace
@@ -9,34 +9,23 @@ namespace
 // Handlers
 // ------------------------
 
-void verboseLogHandler(const std::ostringstream& stream)
-{
-    std::cout << "[V] " << stream.str();
-}
+#ifdef logHandler
+#  error "logHandler is already defined"
+#endif
 
+#define logHandler(prefix, identifier)                                  \
+    void prefix##LogHandler(const std::ostringstream& stream)           \
+    {                                                                   \
+        std::printf("[%c] %s", identifier, stream.str().c_str());       \
+    }
 
-void debugLogHandler(const std::ostringstream& stream)
-{
-    std::cout << "[D] " << stream.str();
-}
+logHandler(verbose, 'V');
+logHandler(debug,   'D');
+logHandler(info,    'I');
+logHandler(warning, 'W');
+logHandler(error,   'E');
 
-
-void infoLogHandler(const std::ostringstream& stream)
-{
-    std::cout << "[I] " << stream.str();
-}
-
-
-void warningLogHandler(const std::ostringstream& stream)
-{
-    std::cout << "[W] " << stream.str();
-}
-
-
-void errorLogHandler(const std::ostringstream& stream)
-{
-    std::cout << "[E] " << stream.str();
-}
+#undef logHandler
 
 } // namespace
 
@@ -99,4 +88,5 @@ log_private::StreamProxy w(warningLogHandler);  // Level 3
 log_private::StreamProxy e(errorLogHandler);    // Level 4
 
 } // namespace log
+
 } // namespace t3d
